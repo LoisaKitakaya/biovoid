@@ -1,0 +1,16 @@
+/* bootstrap icons */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+body,
+html {
+  padding: 0 !important;
+  margin: 0 !important;
+  scroll-behavior: smooth !important;
+  min-height: 92vh !important;
+  background-color: whitesmoke;
+}
+
+#home-card {
+  width: 50%;
+  margin: 3rem auto 0 auto;
+}
