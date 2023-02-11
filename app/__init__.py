@@ -10,9 +10,8 @@ def create_app(config_class=Config):
     # initialize flask extension here
 
     # register blueprints here
-
-    @app.route('/hello/')
-    def hello():
-        return 'Hello World!'
+    from app.core import bp as main_blueprint
+    
+    app.register_blueprint(main_blueprint)
 
     return app
