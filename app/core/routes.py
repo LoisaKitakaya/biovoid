@@ -1,3 +1,4 @@
+import os
 from app.core import bp
 from app.models.users import User
 from werkzeug.security import check_password_hash
@@ -13,7 +14,13 @@ def home():
 @login_required
 def admin():
 
-    return render_template('admin/admin.html', super_user = current_user)
+    users = User.query.all()
+
+    return render_template(
+        'admin/admin.html',
+        super_user=current_user,
+        all_users=users,
+    )
 
 @bp.route('/sign_in/', methods=['GET', 'POST'])
 def sign_in():
@@ -30,14 +37,19 @@ def sign_in():
 
         except:
 
-            flash('Please check you email and try again.', 'error')
+            flash('Please check your login credentials.', 'error')
             return redirect(url_for('core.sign_in'))
 
         else:
 
             if this_user == None:
 
-                flash('Please check you email and try again.', 'error')
+                flash('Such a user does not exist.', 'error')
+                return redirect(url_for('core.sign_in'))
+
+            if this_user.email != os.environ.get('ADMIN_EMAIL'):
+                
+                flash('You are not the site admin!', 'error')
                 return redirect(url_for('core.sign_in'))
             
             if not check_password_hash(this_user.password, password):
