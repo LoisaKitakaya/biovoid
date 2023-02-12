@@ -21,8 +21,8 @@ class Address(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    city = db.Column(db.String(256), nullable=False)
-    state_or_province = db.Column(db.String(256), nullable=False)
+    city_or_town = db.Column(db.String(256), nullable=False)
+    state_or_county = db.Column(db.String(256), nullable=False)
     physical_address = db.Column(db.String(256), nullable=False)
     country = db.Column(db.String(256), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
