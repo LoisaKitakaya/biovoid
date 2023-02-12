@@ -1,9 +1,17 @@
-import click
 import re
+import click
+
+# flask
 from flask import Flask
 
+# app factory config
 from config import Config
+
+# extensions
 from app.extensions import db, migrate
+
+# app models
+from app.models.users import User
 
 def create_app(config_class=Config):
 
@@ -31,7 +39,7 @@ def create_app(config_class=Config):
 
             click.secho("Invalid email address", fg="red")
 
-        if password!= password_2:
+        if password != password_2:
 
             click.secho("Passwords do not match", fg="red")
 
