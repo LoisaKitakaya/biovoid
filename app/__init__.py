@@ -27,6 +27,7 @@ def create_app(config_class=Config):
     
     app.register_blueprint(main_blueprint)
 
+    # create superuser custom command
     @app.cli.command("createsuperuser")
     def create_superuser():
 
