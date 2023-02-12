@@ -9,7 +9,7 @@ class User(db.Model):
     public_id = db.Column(db.String(256), unique=True, nullable=False)
     username = db.Column(db.String(64), unique=True, nullable=False)
     email = db.Column(db.String(256), unique=True, nullable=False)
-    password = db.Column(db.String(256), nullable=False)
+    password = db.Column(db.String(256), unique=True, nullable=False)
     address = db.relationship('Address', backref='user_address')
 
     def __repr__(self):
