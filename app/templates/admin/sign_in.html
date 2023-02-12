@@ -10,7 +10,11 @@
   <h3 class="text-center">Log in to manage your store</h3>
   <br />
   <div class="card shadow">
-    <form accept="" method="POST" class="card-body">
+    <form
+      accept="{{ url_for('core.sign_in') }}"
+      method="post"
+      class="card-body"
+    >
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <input
