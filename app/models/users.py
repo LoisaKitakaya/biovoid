@@ -1,7 +1,8 @@
 from app.extensions import db
 from sqlalchemy.sql import func
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(UserMixin, db.Model):
 
     _tablename__ = "Users"
 
