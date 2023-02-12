@@ -10,3 +10,8 @@ def home():
 def admin():
 
     return render_template('admin/admin.html')
+
+@bp.route('/sign_in/')
+def sign_in():
+
+    return render_template('admin/sign_in.html')

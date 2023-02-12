@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+<!-- title -->
+{% block title %} Sign In {% endblock %}
+<!-- title -->
+
+<!-- body -->
+{% block body %}
+<div id="card-signin">
+  <h3 class="text-center">Log in to manage your store</h3>
+  <br />
+  <div class="card shadow">
+    <form accept="" method="POST" class="card-body">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          placeholder="email address"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          placeholder="***********"
+        />
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+        <label class="form-check-label" for="exampleCheck1">Remember me</label>
+      </div>
+      <button type="submit" class="btn btn-success container-fluid">
+        Sign In
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+<!-- body -->
