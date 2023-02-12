@@ -5,3 +5,8 @@ from app.core import bp
 def home():
 
     return render_template('home.html')
+
+@bp.route('/admin/')
+def admin():
+
+    return render_template('admin/admin.html')

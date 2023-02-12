@@ -10,6 +10,16 @@ html {
   background-color: whitesmoke;
 }
 
+nav,
+footer {
+  background-color: #e3f2fd;
+}
+
+#app {
+  min-height: 92vh;
+  background-color: white;
+}
+
 #home-card {
   width: 50%;
   margin: 3rem auto 0 auto;
