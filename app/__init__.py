@@ -1,10 +1,10 @@
 import re
 import click
+from uuid import uuid4
+from werkzeug.security import generate_password_hash
 
-# flask
+# flask and app factory config
 from flask import Flask
-
-# app factory config
 from config import Config
 
 # extensions
@@ -37,14 +37,35 @@ def create_app(config_class=Config):
 
         if not re.search("(^\w+)@([a-z]+)[.]([a-z]+\S)$", email):
 
-            click.secho("Invalid email address", fg="red")
+            return click.secho("Invalid email address", fg="red")
 
         if password != password_2:
 
-            click.secho("Passwords do not match", fg="red")
+            return click.secho("Passwords do not match", fg="red")
 
         if len(password) < 8 and len(password_2) < 8:
 
-            click.secho("Passwords must be at least 8 characters", fg="red")
+            return click.secho("Passwords must be at least 8 characters", fg="red")
+
+        super_user = User(
+            username=name,
+            email=email,
+            public_id=str(uuid4().hex),
+            password=generate_password_hash(password, method='sha256')
+        )
+
+        try:
+
+            db.session.add(super_user)
+
+        except:
+
+            click.secho('Something went wrong', fg="red")
+            return None
+
+        else:
+
+            db.session.commit()
+            click.secho('Superuser created successfully', fg="green")
 
     return app
