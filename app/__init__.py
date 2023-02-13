@@ -14,7 +14,9 @@ from app.extensions import db, migrate, login_manager
 from app.core import bp as main_blueprint
 
 # app models
-from app.models.users import User
+from app.models.users import User, Address
+from app.models.products import ProductCategory, ProductDiscount, ProductInventory, Product
+from app.models.orders import OrderItem, PaymentDetails, Order
 
 def create_app(config_class=Config):
 
