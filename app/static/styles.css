@@ -41,6 +41,10 @@ footer {
   margin: 3rem auto 0 auto;
 }
 
+#admin-card {
+  margin: 0 auto;
+}
+
 #card-signin {
   width: 50%;
   margin: 3rem auto;
