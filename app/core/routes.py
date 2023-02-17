@@ -23,10 +23,60 @@ def admin():
 
     return render_template(
         'admin/admin.html',
-        super_user=current_user,
+        this_user=current_user,
         all_users=users,
         gallery=images,
     )
+
+@bp.route('/sign_up/', methods=['GET', 'POST'])
+def sign_up():
+
+    if request.method == 'POST':
+
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        password_2 = request.form.get('password_2')
+
+        if not re.search("(^\w+)@([a-z]+)[.]([a-z]+\S)$", email):
+
+            flash("Invalid email address format.", "error")
+            return redirect(url_for('core.admin'))
+
+        if password != password_2:
+
+            flash("Passwords don't match", "error")
+            return redirect(url_for('core.admin'))
+
+        if len(password) < 8 and len(password_2) < 8:
+
+            flash("Passwords much be at least 8 characters.", "error")
+            return redirect(url_for('core.admin'))
+
+        super_user = User(
+            username=username,
+            email=email,
+            public_id=str(uuid4().hex),
+            password=generate_password_hash(password, method='sha256')
+        )
+
+        try:
+
+            db.session.add(super_user)
+
+        except:
+
+            flash("Something went wrong.", "error")
+            return redirect(url_for('core.admin'))
+
+        else:
+
+            db.session.commit()
+
+            flash("User created successfully.", "message")
+            return redirect(url_for('core.admin'))
+        
+    return render_template('admin/sign_up.html')
 
 @bp.route('/sign_in/', methods=['GET', 'POST'])
 def sign_in():
@@ -51,11 +101,6 @@ def sign_in():
             if this_user == None:
 
                 flash('Such a user does not exist.', 'error')
-                return redirect(url_for('core.sign_in'))
-
-            if this_user.email != os.environ.get('ADMIN_EMAIL'):
-                
-                flash('You are not the site admin!', 'error')
                 return redirect(url_for('core.sign_in'))
             
             if not check_password_hash(this_user.password, password):

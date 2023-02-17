@@ -8,6 +8,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), unique=True, nullable=False)
     email = db.Column(db.String(256), unique=True, nullable=False)
     password = db.Column(db.String(256), unique=True, nullable=False)
+    role = db.Column(db.String(50), nullable=False, default="standarduser")
     image = db.relationship('Image', backref='user_image')
 
     def __repr__(self):
