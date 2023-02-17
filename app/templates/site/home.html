@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+<!-- title -->
+{% block title %} Home {% endblock %}
+<!-- title -->
+
+<!-- body -->
+{% block body %}
+<!-- navbar -->
+{% include 'navbar.html' %}
+<!-- navbar -->
+
+<!-- content -->
+<div id="app" class="container-fluid">
+  <div class="container">
+    
+  </div>
+</div>
+
+<!-- notifications -->
+<div class="site-alerts">{% include 'notifications.html' %}</div>
+<!-- notifications -->
+
+<!-- content -->
+
+<!-- modals -->
+{% include 'admin/modals.html' %}
+<!-- modals -->
+
+<!-- footer -->
+{% include 'footer.html' %}
+<!-- footer -->
+{% endblock %}
+<!-- body -->
