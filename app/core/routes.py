@@ -1,6 +1,7 @@
 import os
 from app.core import bp
 from app.models.users import User
+from app.models.art import Image
 from werkzeug.security import check_password_hash
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
@@ -15,11 +16,13 @@ def home():
 def admin():
 
     users = User.query.all()
+    images = Image.query.all()
 
     return render_template(
         'admin/admin.html',
         super_user=current_user,
         all_users=users,
+        gallery=images,
     )
 
 @bp.route('/sign_in/', methods=['GET', 'POST'])
@@ -71,3 +74,13 @@ def sign_out():
 
     flash("Logged out successfully.", "message")
     return redirect(url_for('core.sign_in'))
+
+@bp.route('/create_user/')
+def create_user():
+
+    pass
+
+@bp.route('/generate_image/')
+def generate_image():
+
+    pass

@@ -14,9 +14,8 @@ from app.extensions import db, migrate, login_manager
 from app.core import bp as main_blueprint
 
 # app models
-from app.models.users import User, Address
-from app.models.products import ProductCategory, ProductDiscount, ProductInventory, Product
-from app.models.orders import OrderItem, PaymentDetails, Order
+from app.models.users import User
+from app.models.art import Image
 
 def create_app(config_class=Config):
 
@@ -32,7 +31,7 @@ def create_app(config_class=Config):
     app.register_blueprint(main_blueprint)
 
     # create superuser custom command
-    @app.cli.command("createsuperuser")
+    @app.cli.command("create-user")
     def create_superuser():
 
         name = click.prompt("Enter superuser name")
