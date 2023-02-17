@@ -13,11 +13,16 @@
     class="card-img-top"
   />
   <div class="card-body text-center">
-    <h4 class="card-title">My Shop Admin Panel</h4>
+    <h4 class="card-title">
+      bio<span class="text-danger">V</span>oid Admin Panel
+    </h4>
     <hr />
-    <a href="{{ url_for('core.admin') }}" class="card-link">Manage store</a>
-    <a href="" class="card-link">API schema</a>
-    <a href="" class="card-link">Go to store</a>
+    <a
+      href="{{ url_for('core.admin') }}"
+      class="btn btn-sm btn-dark container-fluid mb-3"
+      >Manage site</a
+    >
+    <a href="" class="btn btn-sm btn-success container-fluid">View site</a>
   </div>
 </div>
 {% endblock %}

@@ -26,9 +26,10 @@ footer {
   background-color: #e3f2fd;
 }
 
-footer {
-  font-family: "Zeyada", cursive;
-  font-weight: bold;
+footer p {
+  margin-top: 1rem;
+  font-weight: lighter;
+  font-size: medium;
 }
 
 #app {
