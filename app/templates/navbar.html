@@ -54,7 +54,7 @@
       </ul>
       <div class="d-flex">
         <button disabled class="mx-3 btn btn-sm btn-outline-success">
-          <strong>Logged in as: {{ super_user.username }}</strong>
+          <strong>Logged in as: {{ this_user.username }}</strong>
         </button>
         <a
           href="{{ url_for('core.sign_out') }}"

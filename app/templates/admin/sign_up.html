@@ -1,20 +1,29 @@
 {% extends 'base.html' %}
 
 <!-- title -->
-{% block title %} Sign In {% endblock %}
+{% block title %} Sign Up {% endblock %}
 <!-- title -->
 
 <!-- body -->
 {% block body %}
 <div id="card-signin">
-  <h3 class="text-center">Login to access app</h3>
+  <h3 class="text-center">Create user account</h3>
   <br />
   <div class="card shadow">
     <form
-      action="{{ url_for('core.sign_in') }}"
+      action="{{ url_for('core.sign_up') }}"
       method="post"
       class="card-body"
     >
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          placeholder="Username"
+        />
+      </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <input
@@ -33,12 +42,17 @@
           placeholder="***********"
         />
       </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" name="remember" />
-        <label class="form-check-label" for="remember">Remember me</label>
+      <div class="mb-3">
+        <label for="password_2" class="form-label">Confirm password</label>
+        <input
+          type="password"
+          name="password_2"
+          class="form-control"
+          placeholder="***********"
+        />
       </div>
       <button type="submit" class="btn btn-success container-fluid">
-        Sign In
+        Sign Up
       </button>
     </form>
   </div>
@@ -49,8 +63,8 @@
       ><i class="bi bi-arrow-left-short"></i> Home</a
     >
     |
-    <a href="{{ url_for('core.sign_up') }}"
-      >Sign up <i class="bi bi-arrow-right-short"></i
+    <a href="{{ url_for('core.sign_in') }}"
+      >Sign in <i class="bi bi-arrow-right-short"></i
     ></a>
   </div>
 </div>
