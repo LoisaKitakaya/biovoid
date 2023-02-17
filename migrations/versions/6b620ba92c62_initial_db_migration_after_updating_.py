@@ -1,8 +1,8 @@
-"""Initial bd migration after changing model
+"""initial db migration after updating user model
 
-Revision ID: c408923ad6d0
+Revision ID: 6b620ba92c62
 Revises: 
-Create Date: 2023-02-17 11:13:36.836990
+Create Date: 2023-02-17 18:32:22.643190
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c408923ad6d0'
+revision = '6b620ba92c62'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,6 +24,7 @@ def upgrade():
     sa.Column('username', sa.String(length=64), nullable=False),
     sa.Column('email', sa.String(length=256), nullable=False),
     sa.Column('password', sa.String(length=256), nullable=False),
+    sa.Column('role', sa.String(length=50), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('password'),
