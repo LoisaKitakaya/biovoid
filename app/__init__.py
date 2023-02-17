@@ -31,7 +31,7 @@ def create_app(config_class=Config):
     app.register_blueprint(main_blueprint)
 
     # create superuser custom command
-    @app.cli.command("create-user")
+    @app.cli.command("createsuperuser")
     def create_superuser():
 
         name = click.prompt("Enter superuser name")
@@ -55,7 +55,8 @@ def create_app(config_class=Config):
             username=name,
             email=email,
             public_id=str(uuid4().hex),
-            password=generate_password_hash(password, method='sha256')
+            password=generate_password_hash(password, method='sha256'),
+            role="superuser"
         )
 
         try:
