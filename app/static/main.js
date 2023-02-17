@@ -1,6 +1,5 @@
 const clearNotification = () => {
   const notificationBox = document.getElementById("flash-box");
-
   notificationBox.remove();
 };
 
@@ -10,3 +9,8 @@ var tooltipTriggerList = [].slice.call(
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl);
 });
+
+const createNewUser = () => {
+  const userForm = document.getElementById("user-form");
+  userForm.submit();
+};

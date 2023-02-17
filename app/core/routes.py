@@ -1,9 +1,12 @@
 import os
+import re
+from uuid import uuid4
 from app.core import bp
-from app.models.users import User
+from app.extensions import db
 from app.models.art import Image
-from werkzeug.security import check_password_hash
+from app.models.users import User
 from flask import render_template, redirect, url_for, flash, request
+from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
 @bp.route('/', methods=['GET'])
@@ -75,12 +78,55 @@ def sign_out():
     flash("Logged out successfully.", "message")
     return redirect(url_for('core.sign_in'))
 
-@bp.route('/create_user/')
+@bp.route('/create_user/', methods=['GET', 'POST'])
 def create_user():
 
-    pass
+    if request.method == 'POST':
 
-@bp.route('/generate_image/')
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        password_2 = request.form.get('password_2')
+
+        if not re.search("(^\w+)@([a-z]+)[.]([a-z]+\S)$", email):
+
+            flash("Invalid email address format.", "error")
+            return redirect(url_for('core.admin'))
+
+        if password != password_2:
+
+            flash("Passwords don't match", "error")
+            return redirect(url_for('core.admin'))
+
+        if len(password) < 8 and len(password_2) < 8:
+
+            flash("Passwords much be at least 8 characters.", "error")
+            return redirect(url_for('core.admin'))
+
+        super_user = User(
+            username=username,
+            email=email,
+            public_id=str(uuid4().hex),
+            password=generate_password_hash(password, method='sha256')
+        )
+
+        try:
+
+            db.session.add(super_user)
+
+        except:
+
+            flash("Something went wrong.", "error")
+            return redirect(url_for('core.admin'))
+
+        else:
+
+            db.session.commit()
+
+            flash("User created successfully.", "message")
+            return redirect(url_for('core.admin'))
+
+@bp.route('/generate_image/', methods=['GET', 'POST'])
 def generate_image():
 
     pass

@@ -7,11 +7,11 @@
 <!-- body -->
 {% block body %}
 <div id="card-signin">
-  <h3 class="text-center">Log in to manage your store</h3>
+  <h3 class="text-center">Admin credential please!</h3>
   <br />
   <div class="card shadow">
     <form
-      accept="{{ url_for('core.sign_in') }}"
+      action="{{ url_for('core.sign_in') }}"
       method="post"
       class="card-body"
     >

@@ -41,7 +41,7 @@ def create_app(config_class=Config):
 
         if not re.search("(^\w+)@([a-z]+)[.]([a-z]+\S)$", email):
 
-            return click.secho("Invalid email address", fg="red")
+            return click.secho("Invalid email address format", fg="red")
 
         if password != password_2:
 
@@ -70,7 +70,7 @@ def create_app(config_class=Config):
         else:
 
             db.session.commit()
-            click.secho('Superuser created successfully', fg="green")
+            click.secho('User created successfully', fg="green")
 
      # login manager callback
     @login_manager.user_loader
