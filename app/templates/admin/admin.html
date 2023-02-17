@@ -86,6 +86,7 @@
               <th scope="col">Username</th>
               <th scope="col">Email</th>
               <th scope="col">Public ID</th>
+              <th scope="col">Role</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -94,9 +95,16 @@
             {% for user in all_users %}
             <tr>
               <td>{{ user.id }}</td>
-              <td><a href="">{{ user.username }}</a></td>
+              <td>
+                <span class="fw-bold text-primary">{{ user.username }}</span>
+              </td>
               <td>{{ user.email }}</td>
               <td>{{ user.public_id }}</td>
+              <td>
+                {% if user.role == "superuser" %}
+                <span class="text-success fw-bold">{{ user.role }}</span>
+                {% else %} {{ user.role }} {% endif %}
+              </td>
               <td>
                 <a
                   href="{{ url_for('core.delete_user', public_id=user.public_id) }}"

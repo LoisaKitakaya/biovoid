@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container">
-    <a class="navbar-brand" href="{{ url_for('core.home') }}"
+    <a class="navbar-brand" href="{{ url_for('site.home') }}"
       ><strong>bio<span class="text-danger">V</span>oid</strong></a
     >
     <button
@@ -16,8 +16,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if this_user.role == "superuser" %}
         <li class="nav-item">
-          <a class="nav-link" href="#">View site</a>
+          <a class="nav-link" href="#">Option 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Option 2</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -51,8 +55,84 @@
             </li>
           </ul>
         </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">API</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Use Cases
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="https://railway.app/dashboard"
+                >Railway</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="https://github.com/LoisaKitakaya"
+                >Github</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="https://cloudinary.com/console/c-c2b70bb2712f02d2cda628766bf7e2"
+                >Cloudinary</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            More
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="https://railway.app/dashboard"
+                >Railway</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="https://github.com/LoisaKitakaya"
+                >Github</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="https://cloudinary.com/console/c-c2b70bb2712f02d2cda628766bf7e2"
+                >Cloudinary</a
+              >
+            </li>
+          </ul>
+        </li>
+        {% endif %}
       </ul>
       <div class="d-flex">
+        {% if this_user.is_authenticated %}
         <button disabled class="mx-3 btn btn-sm btn-outline-success">
           <strong>Logged in as: {{ this_user.username }}</strong>
         </button>
@@ -63,6 +143,22 @@
         >
           Log out
         </a>
+        {% else %}
+        <a
+          href="{{ url_for('core.sign_in') }}"
+          class="btn btn-sm btn-outline-success mx-3"
+          type="submit"
+        >
+          Sign in
+        </a>
+        <a
+          href="{{ url_for('core.sign_up') }}"
+          class="btn btn-sm btn-outline-primary"
+          type="submit"
+        >
+          Sign up
+        </a>
+        {% endif %}
       </div>
     </div>
   </div>

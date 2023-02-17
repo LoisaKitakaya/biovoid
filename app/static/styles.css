@@ -37,11 +37,6 @@ footer p {
   background-color: white;
 }
 
-#home-card {
-  width: 50%;
-  margin: 3rem auto 0 auto;
-}
-
 #admin-card {
   margin: 0 auto;
 }
@@ -54,4 +49,12 @@ footer p {
 .go-back {
   width: fit-content;
   margin: 0.5rem auto;
+}
+
+.site-alerts {
+  position: fixed;
+  bottom: 2rem;
+  width: 50%;
+  margin: auto;
+  right: 2rem;
 }

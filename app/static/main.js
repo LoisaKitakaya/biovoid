@@ -1,7 +1,10 @@
+const notificationBox = document.getElementById("flash-box");
+
 const clearNotification = () => {
-  const notificationBox = document.getElementById("flash-box");
   notificationBox.remove();
 };
+
+setTimeout(clearNotification, 5000);
 
 var tooltipTriggerList = [].slice.call(
   document.querySelectorAll('[data-bs-toggle="tooltip"]')
