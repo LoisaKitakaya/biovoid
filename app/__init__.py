@@ -12,6 +12,7 @@ from app.extensions import db, migrate, login_manager
 
 # blueprints
 from app.core import bp as main_blueprint
+from app.site import bp as site_blueprint
 
 # app models
 from app.models.users import User
@@ -29,6 +30,7 @@ def create_app(config_class=Config):
 
     # register blueprints here
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(site_blueprint)
 
     # create superuser custom command
     @app.cli.command("createsuperuser")
