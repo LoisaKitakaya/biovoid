@@ -146,8 +146,3 @@ def delete_user(public_id):
 
         flash("User deleted successfully.", "message")
         return redirect(url_for('core.admin'))
-
-@bp.route('/generate_image/', methods=['GET', 'POST'])
-def generate_image():
-
-    pass
