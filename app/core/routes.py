@@ -125,6 +125,27 @@ def create_user():
 
             flash("User created successfully.", "message")
             return redirect(url_for('core.admin'))
+        
+@bp.route("/delete_user/<public_id>/", methods=['GET', 'POST'])
+def delete_user(public_id):
+
+    user = User.query.filter_by(public_id=public_id).first()
+
+    try:
+
+        db.session.delete(user)
+
+    except:
+
+        flash("Something went wrong.", "error")
+        return redirect(url_for('core.admin'))
+    
+    else:
+
+        db.session.commit()
+
+        flash("User deleted successfully.", "message")
+        return redirect(url_for('core.admin'))
 
 @bp.route('/generate_image/', methods=['GET', 'POST'])
 def generate_image():

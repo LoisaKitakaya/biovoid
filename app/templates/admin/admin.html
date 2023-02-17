@@ -99,15 +99,7 @@
               <td>{{ user.public_id }}</td>
               <td>
                 <a
-                  href=""
-                  class="btn btn-sm btn-primary"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="right"
-                  title="Edit record"
-                  ><i class="bi bi-pencil-square"></i
-                ></a>
-                <a
-                  href=""
+                  href="{{ url_for('core.delete_user', public_id=user.public_id) }}"
                   class="btn btn-sm btn-danger"
                   data-bs-toggle="tooltip"
                   data-bs-placement="right"
