@@ -1,21 +1,17 @@
-import os
 import re
 from uuid import uuid4
 from app.core import bp
 from app.extensions import db
 from app.models.art import Image
 from app.models.users import User
+from app.core.decorators import admin_required
 from flask import render_template, redirect, url_for, flash, request
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-@bp.route('/', methods=['GET'])
-def home():
-
-    return render_template('home.html')
-
 @bp.route('/admin/', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def admin():
 
     users = User.query.all()
@@ -41,19 +37,19 @@ def sign_up():
         if not re.search("(^\w+)@([a-z]+)[.]([a-z]+\S)$", email):
 
             flash("Invalid email address format.", "error")
-            return redirect(url_for('core.admin'))
+            return redirect(url_for('core.sign_up'))
 
         if password != password_2:
 
             flash("Passwords don't match", "error")
-            return redirect(url_for('core.admin'))
+            return redirect(url_for('core.sign_up'))
 
         if len(password) < 8 and len(password_2) < 8:
 
             flash("Passwords much be at least 8 characters.", "error")
-            return redirect(url_for('core.admin'))
+            return redirect(url_for('core.sign_up'))
 
-        super_user = User(
+        user = User(
             username=username,
             email=email,
             public_id=str(uuid4().hex),
@@ -62,19 +58,19 @@ def sign_up():
 
         try:
 
-            db.session.add(super_user)
+            db.session.add(user)
 
         except:
 
             flash("Something went wrong.", "error")
-            return redirect(url_for('core.admin'))
+            return redirect(url_for('core.sign_up'))
 
         else:
 
             db.session.commit()
 
             flash("User created successfully.", "message")
-            return redirect(url_for('core.admin'))
+            return redirect(url_for('core.sign_in'))
         
     return render_template('admin/sign_up.html')
 
@@ -110,18 +106,17 @@ def sign_in():
 
             login_user(this_user, remember=remember)
 
-            flash("Logged in successfully.", "message")
-            return redirect(url_for('core.admin'))
+            if current_user.role == "superuser":
+
+                flash("Logged in successfully.", "message")
+                return redirect(url_for('core.admin'))
+            
+            else:
+
+                flash("Logged in successfully.", "message")
+                return redirect(url_for('site.home'))
 
     return render_template('admin/sign_in.html')
-
-@bp.route('/sign_out/')
-def sign_out():
-
-    logout_user()
-
-    flash("Logged out successfully.", "message")
-    return redirect(url_for('core.sign_in'))
 
 @bp.route('/create_user/', methods=['GET', 'POST'])
 def create_user():
@@ -191,3 +186,11 @@ def delete_user(public_id):
 
         flash("User deleted successfully.", "message")
         return redirect(url_for('core.admin'))
+    
+@bp.route('/sign_out/')
+def sign_out():
+
+    logout_user()
+
+    flash("Logged out successfully.", "message")
+    return redirect(url_for('core.sign_in'))
