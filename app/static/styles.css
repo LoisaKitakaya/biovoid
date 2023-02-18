@@ -53,8 +53,13 @@ footer p {
 
 .site-alerts {
   position: fixed;
-  bottom: 2rem;
-  width: 50%;
+  bottom: 0.5rem;
+  width: 40%;
   margin: auto;
   right: 2rem;
+}
+
+.banner {
+  min-height: 92vh;
+  background-image: url("https://images.pexels.com/photos/1764702/pexels-photo-1764702.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
 }

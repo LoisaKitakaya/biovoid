@@ -75,7 +75,7 @@ def create_app(config_class=Config):
             db.session.commit()
             click.secho('User created successfully', fg="green")
 
-     # login manager callback
+    # login manager callback
     @login_manager.user_loader
     def load_user(id):
 
