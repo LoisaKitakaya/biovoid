@@ -1,14 +1,70 @@
 import os
 import openai
+from flask import flash
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
-response = openai.Image.create(
-  prompt="nostalgic city skyline at a sunset in a dystopian future. Style: Realism",
-  n=3,
-  size="256x256"
-)
-image_url = response['data']
-for image in image_url:
+class AIArtGenerator:
 
-    print(image.url)
+  def __init__(self, prompt, n, size) -> None:
+      
+      self.prompt = prompt
+      self.n = n
+      self.size = size
+
+  def generate_art(self):
+      
+      try:
+          
+        generate = openai.Image.create(
+          prompt=self.prompt,
+          n=self.n,
+          size=self.size
+        )
+
+      except:
+
+        flash("Something went wrong", "error")
+        return None
+
+      response = generate['data']
+
+      return response
+
+  def photo_to_image(self):
+      
+      try:
+          
+        generate = openai.Image.create(
+          prompt=self.prompt,
+          n=self.n,
+          size=self.size
+        )
+
+      except:
+
+        flash("Something went wrong", "error")
+        return None
+
+      response = generate['data']
+
+      return response
+
+  def edit_image(self):
+      
+      try:
+          
+        generate = openai.Image.create(
+          prompt=self.prompt,
+          n=self.n,
+          size=self.size
+        )
+
+      except:
+
+        flash("Something went wrong", "error")
+        return None
+
+      response = generate['data']
+
+      return response
