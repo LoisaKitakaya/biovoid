@@ -60,6 +60,6 @@ footer p {
 }
 
 .banner {
-  min-height: 92vh;
-  background-image: url("https://images.pexels.com/photos/1764702/pexels-photo-1764702.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  height: 92vh;
+  background-image: url("https://images.pexels.com/photos/2512282/pexels-photo-2512282.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
 }
