@@ -345,3 +345,136 @@
   </div>
 </div>
 <!-- image to art modal -->
+
+<!-- image variation modal -->
+<div
+  class="modal fade"
+  id="imageVariationModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="imageVariationModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageVariationModalLabel">Generate Art</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          action="{{ url_for('site.image_variation') }}"
+          enctype="multipart/form-data"
+          method="post"
+          id="image-variation-form"
+        >
+          <div class="mb-3">
+            <label for="formFile" class="form-label"
+              >Image to generate art from</label
+            >
+            <input
+              class="form-control"
+              name="image"
+              type="file"
+              id="formFile"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Number of images to be generated</label>
+            <br />
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="number"
+                value="1"
+                id="inlineRadio1"
+              />
+              <label class="form-check-label" for="inlineRadio1">1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="number"
+                value="2"
+                id="inlineRadio2"
+              />
+              <label class="form-check-label" for="inlineRadio2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="number"
+                value="3"
+                id="inlineRadio3"
+              />
+              <label class="form-check-label" for="inlineRadio3">3</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="number"
+                value="4"
+                id="inlineRadio4"
+              />
+              <label class="form-check-label" for="inlineRadio4">4</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Size of images to be generated</label>
+            <br />
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="size"
+                value="256x256"
+                id="sizeRadio1"
+              />
+              <label class="form-check-label" for="sizeRadio1">256x256</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="size"
+                value="512x512"
+                id="sizeRadio2"
+              />
+              <label class="form-check-label" for="sizeRadio2">512x512</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="size"
+                value="1024x1024"
+                id="sizeRadio3"
+              />
+              <label class="form-check-label" for="sizeRadio3">1024x1024</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success container-fluid"
+          onclick="imageVariation()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- image variation modal -->
