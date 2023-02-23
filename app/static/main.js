@@ -17,3 +17,16 @@ const createNewUser = () => {
   const userForm = document.getElementById("user-form");
   userForm.submit();
 };
+
+const generateArt = () => {
+  const generateForm = document.getElementById("generate-art-form");
+  generateForm.submit();
+};
+
+const downloadImage = (url, fileName) => {
+  var link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", fileName);
+  link.click();
+}
+
