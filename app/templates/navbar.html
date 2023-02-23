@@ -56,8 +56,41 @@
           </ul>
         </li>
         {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="#">Playground</a>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Services
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="{{ url_for('site.generate_art') }}"
+                >Text To Art</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ url_for('site.photo_to_art') }}"
+                >Image To Art</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ url_for('site.edit_image') }}"
+                >Image Editor</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="{{ url_for('site.image_variation') }}"
+                >Image Variation</a
+              >
+            </li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
@@ -68,70 +101,12 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Use Cases
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="https://railway.app/dashboard"
-                >Railway</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item" href="https://github.com/LoisaKitakaya"
-                >Github</a
-              >
-            </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a
-                class="dropdown-item"
-                href="https://cloudinary.com/console/c-c2b70bb2712f02d2cda628766bf7e2"
-                >Cloudinary</a
-              >
-            </li>
-          </ul>
+        {% if this_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="#">My Collection</a>
         </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            More
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="https://railway.app/dashboard"
-                >Railway</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item" href="https://github.com/LoisaKitakaya"
-                >Github</a
-              >
-            </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a
-                class="dropdown-item"
-                href="https://cloudinary.com/console/c-c2b70bb2712f02d2cda628766bf7e2"
-                >Cloudinary</a
-              >
-            </li>
-          </ul>
-        </li>
+        {% endif %}
+        <!--  -->
         {% endif %}
       </ul>
       <div class="d-flex">

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+<!-- title -->
+{% block title %} Generate Art {% endblock %}
+<!-- title -->
+
+<!-- body -->
+{% block body %}
+<!-- navbar -->
+{% include 'navbar.html' %}
+<!-- navbar -->
+
+<!-- content -->
+
+<div id="app" class="container-fluid">
+  <div class="container py-5">
+    <div class="card text-center mb-5">
+      <div class="card-header">How it works</div>
+      <div class="card-body">
+        <h5 class="card-title fw-bold">Text to AI generated art</h5>
+        <p class="card-text">
+          You to create an original image given a
+          <span class="text-primary">text prompt</span>. Generated images can
+          have a size of <span class="text-primary">256x256</span>,
+          <span class="text-primary">512x512</span>, or
+          <span class="text-primary">1024x1024</span> pixels. Smaller sizes are
+          faster to generate. You can request 1-4 images at a time using the
+          <span class="text-primary">number</span>
+          parameter.
+        </p>
+        <p class="card-text">
+          The more detailed the description, the better the result that you will
+          get.
+        </p>
+        <button
+          class="btn btn-outline-secondary container fluid"
+          data-bs-toggle="modal"
+          data-bs-target="#generateArtModal"
+        >
+          Generate Art
+        </button>
+      </div>
+    </div>
+    {% if generated_response %}
+    <div class="card">
+      <h1 class="card-title text-center mt-3">Recently generated images</h1>
+      <div class="card-body d-flex justify-content-center alaign-items-center">
+        {% for image in generated_response.data %}
+        <div class="card mx-3 shadow">
+          <img src="{{ image.url }}" alt="generated art" class="card-img-top" />
+          <div
+            class="card-body d-flex justify-content-center alaign-items-center"
+          >
+            <a
+              href="{{ image.url }}"
+              class="btn btn-sm btn-outline-success mx-1"
+              target="_blank"
+              download
+            >
+              Download <i class="bi bi-cloud-download"></i>
+            </a>
+            <a
+              href=""
+              class="btn btn-sm btn-outline-primary mx-1"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Add to your collection"
+              >Save <i class="bi bi-download"></i
+            ></a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title text-center mt-3">
+          Generated images will appear here
+        </h1>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- notifications -->
+<div class="site-alerts">{% include 'notifications.html' %}</div>
+<!-- notifications -->
+
+<!-- content -->
+
+<!-- modals -->
+{% include 'site/app/modals.html' %}
+<!-- modals -->
+
+<!-- footer -->
+{% include 'footer.html' %}
+<!-- footer -->
+{% endblock %}
+<!-- body -->

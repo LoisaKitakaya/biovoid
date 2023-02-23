@@ -27,16 +27,26 @@
       class="d-flex justify-content-center align-items-center"
       style="margin-top: 5rem"
     >
-      <a href="" class="btn btn-lg btn-outline-success mx-3">Get Started</a>
-      <a href="" class="btn btn-lg btn-outline-success mx-3">View Examples</a>
-      <a href="" class="btn btn-lg btn-outline-primary mx-3"
-        >Text To Image AI Art</a
+      <a href="" class="btn btn-lg btn-outline-success mx-3">AI Art Gallery</a>
+      <a
+        href="{{ url_for('site.generate_art') }}"
+        class="btn btn-lg btn-outline-primary mx-3"
+        >Text To Art</a
       >
-      <a href="" class="btn btn-lg btn-outline-primary mx-3"
-        >Photo To Image AI Art</a
+      <a
+        href="{{ url_for('site.photo_to_art') }}"
+        class="btn btn-lg btn-outline-primary mx-3"
+        >Image To Art</a
       >
-      <a href="" class="btn btn-lg btn-outline-primary mx-3"
-        >AI Image Editor
+      <a
+        href="{{ url_for('site.edit_image') }}"
+        class="btn btn-lg btn-outline-primary mx-3"
+        >Image Editor
+      </a>
+      <a
+        href="{{ url_for('site.image_variation') }}"
+        class="btn btn-lg btn-outline-primary mx-3"
+        >Image Variation
       </a>
     </div>
   </div>
@@ -113,10 +123,6 @@
 <!-- notifications -->
 
 <!-- content -->
-
-<!-- modals -->
-{% include 'admin/modals.html' %}
-<!-- modals -->
 
 <!-- footer -->
 {% include 'footer.html' %}
