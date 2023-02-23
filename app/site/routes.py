@@ -51,8 +51,6 @@ def photo_to_art():
         number = request.form.get('number')
         size = request.form.get('size')
 
-        print(image)
-
         prompt = f"style: {style}. Description: {text_prompt}"
 
         image_object = AIArtGenerator(
@@ -75,9 +73,26 @@ def photo_to_art():
 @login_required
 def image_variation():
 
+    if request.method == 'POST':
+
+        image = request.files['image'].stream.read()
+        number = request.form.get('number')
+        size = request.form.get('size')
+
+        image_object = AIArtGenerator(
+            prompt='',
+            n=number,
+            size=size
+        )
+
+        response.update({"data": image_object.image_variation(image=image)})
+
+        return redirect(url_for('site.image_variation'))
+
     return render_template(
         'site/app/image_variation.html',
-        this_user=current_user
+        this_user=current_user,
+        generated_response=response['data']
     )
 
 @bp.route('/app/save_image/', methods=['POST'])

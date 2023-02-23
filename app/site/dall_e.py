@@ -45,7 +45,7 @@ class AIArtGenerator:
       except:
 
         flash("Something went wrong", "error")
-        raise
+        return None
 
       response = generate['data']
 
@@ -56,8 +56,7 @@ class AIArtGenerator:
       try:
           
         generate = openai.Image.create_variation(
-          image=open(str(image), "rb"),
-          prompt=self.prompt,
+          image=image,
           n=self.n,
           size=self.size
         )

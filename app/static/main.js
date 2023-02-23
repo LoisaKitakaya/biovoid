@@ -28,6 +28,11 @@ const photoToArt = () => {
   generateForm.submit();
 };
 
+const imageVariation = () => {
+  const generateForm = document.getElementById("image-variation-form");
+  generateForm.submit();
+};
+
 const downloadImage = (url, fileName) => {
   var link = document.createElement("a");
   link.setAttribute("href", url);
