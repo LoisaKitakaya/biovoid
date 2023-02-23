@@ -36,7 +36,7 @@ class AIArtGenerator:
       try:
           
         generate = openai.Image.create_edit(
-          image=open(str(image), "rb"),
+          image=image,
           prompt=self.prompt,
           n=self.n,
           size=self.size
@@ -45,28 +45,7 @@ class AIArtGenerator:
       except:
 
         flash("Something went wrong", "error")
-        return None
-
-      response = generate['data']
-
-      return response
-
-  def edit_image(self, image, mask):
-      
-      try:
-          
-        generate = openai.Image.create_edit(
-          image=open(str(image), "rb"),
-          mask=open(str(mask), "rb"),
-          prompt=self.prompt,
-          n=self.n,
-          size=self.size
-        )
-
-      except:
-
-        flash("Something went wrong", "error")
-        return None
+        raise
 
       response = generate['data']
 

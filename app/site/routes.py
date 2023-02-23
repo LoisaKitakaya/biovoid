@@ -8,9 +8,10 @@ def home():
 
     return render_template('site/home.html', this_user=current_user)
 
-response = {}
+response = {"data": []}
 
 @bp.route('/app/generate_art/', methods=['GET', 'POST'])
+@login_required
 def generate_art():
 
     if request.method == 'POST':
@@ -29,37 +30,62 @@ def generate_art():
         )
 
         response.update({"data": image_object.generate_art()})
-        
-        print(response['data'])
 
         return redirect(url_for('site.generate_art'))
 
     return render_template(
         'site/app/generate_art.html',
         this_user=current_user,
-        generated_response=response
+        generated_response=response['data']
     )
 
 @bp.route('/app/photo_to_art/', methods=['GET', 'POST'])
+@login_required
 def photo_to_art():
+
+    if request.method == 'POST':
+
+        style = request.form.get('style')
+        image = request.files['image'].stream.read()
+        text_prompt = request.form.get('text_prompt')
+        number = request.form.get('number')
+        size = request.form.get('size')
+
+        print(image)
+
+        prompt = f"style: {style}. Description: {text_prompt}"
+
+        image_object = AIArtGenerator(
+            prompt=prompt,
+            n=number,
+            size=size
+        )
+
+        response.update({"data": image_object.photo_to_art(image=image)})
+
+        return redirect(url_for('site.photo_to_art'))
 
     return render_template(
         'site/app/photo_to_art.html',
-        this_user=current_user
-    )
-
-@bp.route('/app/edit_image/', methods=['GET', 'POST'])
-def edit_image():
-
-    return render_template(
-        'site/app/edit_image.html',
-        this_user=current_user
+        this_user=current_user,
+        generated_response=response['data']
     )
 
 @bp.route('/app/image_variation/', methods=['GET', 'POST'])
+@login_required
 def image_variation():
 
     return render_template(
         'site/app/image_variation.html',
         this_user=current_user
     )
+
+@bp.route('/app/save_image/', methods=['POST'])
+def save_image():
+
+    pass
+
+@bp.route('/app/delete_image/', methods=['POST'])
+def delete_image():
+
+    pass
