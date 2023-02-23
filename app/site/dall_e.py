@@ -31,11 +31,12 @@ class AIArtGenerator:
 
       return response
 
-  def photo_to_image(self):
+  def photo_to_art(self, image):
       
       try:
           
-        generate = openai.Image.create(
+        generate = openai.Image.create_edit(
+          image=open(str(image), "rb"),
           prompt=self.prompt,
           n=self.n,
           size=self.size
@@ -50,11 +51,33 @@ class AIArtGenerator:
 
       return response
 
-  def edit_image(self):
+  def edit_image(self, image, mask):
       
       try:
           
-        generate = openai.Image.create(
+        generate = openai.Image.create_edit(
+          image=open(str(image), "rb"),
+          mask=open(str(mask), "rb"),
+          prompt=self.prompt,
+          n=self.n,
+          size=self.size
+        )
+
+      except:
+
+        flash("Something went wrong", "error")
+        return None
+
+      response = generate['data']
+
+      return response
+  
+  def image_variation(self, image):
+      
+      try:
+          
+        generate = openai.Image.create_variation(
+          image=open(str(image), "rb"),
           prompt=self.prompt,
           n=self.n,
           size=self.size
