@@ -79,11 +79,6 @@
               >
             </li>
             <li>
-              <a class="dropdown-item" href="{{ url_for('site.edit_image') }}"
-                >Image Editor</a
-              >
-            </li>
-            <li>
               <a
                 class="dropdown-item"
                 href="{{ url_for('site.image_variation') }}"
@@ -92,14 +87,28 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">API</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            More
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="">About</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="">API</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="">Pricing</a>
+            </li>
+          </ul>
         </li>
         {% if this_user.is_authenticated %}
         <li class="nav-item">

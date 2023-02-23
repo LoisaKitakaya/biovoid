@@ -165,3 +165,183 @@
   </div>
 </div>
 <!-- generate art modal -->
+
+<!-- image to art modal -->
+<div
+  class="modal fade"
+  id="imageToArtModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="imageToArtModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageToArtModalLabel">Generate Art</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          action="{{ url_for('site.photo_to_art') }}"
+          enctype="multipart/form-data"
+          method="post"
+          id="photo-to-art-form"
+        >
+          <div class="mb-3">
+            <label for="username" class="form-label"
+              >Art style to be applied</label
+            >
+            <select
+              class="form-select"
+              name="style"
+              aria-label="Art style for generated art"
+            >
+              <option selected class="text-primary">
+                Select your desired style for your art
+              </option>
+              <option value="Renaissance Art">Renaissance Art</option>
+              <option value="Romanticism">Romanticism</option>
+              <option value="Academic Art">Academic Art</option>
+              <option value="Ancient Art">Ancient Art</option>
+              <option value="Realism">Realism</option>
+              <option value="Hyperrealism">Hyperrealism</option>
+              <option value="Pop Art">Pop Art</option>
+              <option value="Ukiyo-e">Ukiyo-e</option>
+              <option value="Japonism">Japonism</option>
+              <option value="Baroque">Baroque</option>
+              <option value="Dutch Golden Age">Dutch Golden Age</option>
+              <option value="Impressionism">Impressionism</option>
+              <option value="Neo-impressionism">Neo-impressionism</option>
+              <option value="Expressionism">Expressionism</option>
+              <option value="Cubism">Cubism</option>
+              <option value="Futurism">Futurism</option>
+              <option value="Symbolism">Symbolism</option>
+              <option value="Art Nouveau">Art Nouveau</option>
+              <option value="Naive Art">Naive Art</option>
+              <option value="Modern Art">Modern Art</option>
+              <option value="Contemporary Art">Contemporary Art</option>
+              <option value="Postmodern Art">Postmodern Art</option>
+              <option value="Stuckism">Stuckism</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label"
+              >Image to generate art from</label
+            >
+            <input
+              class="form-control"
+              name="image"
+              type="file"
+              id="formFile"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="text-prompt" class="form-label">Text prompt</label>
+            <textarea
+              class="form-control"
+              id="text-prompt"
+              name="text_prompt"
+              rows="7"
+              placeholder="In detail describe the image you want to create"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Number of images to be generated</label>
+            <br />
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="number"
+                value="1"
+                id="inlineRadio1"
+              />
+              <label class="form-check-label" for="inlineRadio1">1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="number"
+                value="2"
+                id="inlineRadio2"
+              />
+              <label class="form-check-label" for="inlineRadio2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="number"
+                value="3"
+                id="inlineRadio3"
+              />
+              <label class="form-check-label" for="inlineRadio3">3</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="number"
+                value="4"
+                id="inlineRadio4"
+              />
+              <label class="form-check-label" for="inlineRadio4">4</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Size of images to be generated</label>
+            <br />
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="size"
+                value="256x256"
+                id="sizeRadio1"
+              />
+              <label class="form-check-label" for="sizeRadio1">256x256</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="size"
+                value="512x512"
+                id="sizeRadio2"
+              />
+              <label class="form-check-label" for="sizeRadio2">512x512</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="size"
+                value="1024x1024"
+                id="sizeRadio3"
+              />
+              <label class="form-check-label" for="sizeRadio3">1024x1024</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success container-fluid"
+          onclick="photoToArt()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- image to art modal -->

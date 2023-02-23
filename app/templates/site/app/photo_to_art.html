@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 <!-- title -->
-{% block title %} Image to Art {% endblock %}
+{% block title %} Image To Art {% endblock %}
 <!-- title -->
 
 <!-- body -->
@@ -13,8 +13,74 @@
 <!-- content -->
 
 <div id="app" class="container-fluid">
-  <div class="container">
-    <h1>Image to art</h1>
+  <div class="container py-5">
+    <div class="card text-center mb-5">
+      <div class="card-header">How it works</div>
+      <div class="card-body">
+        <h5 class="card-title fw-bold">Image to AI generated art</h5>
+        <p class="card-text">
+          You can edit and extend an image by uploading a
+          <span class="text-primary">mask</span>. The transparent areas of the
+          mask indicate where the image should be edited, and the
+          <span class="text-primary">prompt</span> should describe the full new
+          image, not just the erased area.
+        </p>
+        <p class="card-text">
+          The uploaded image and mask must both be square PNG images less than
+          4MB in size, and also must have the same dimensions as each other. The
+          non-transparent areas of the mask are not used when generating the
+          output, so they don’t necessarily need to match the original image
+          like the example above.
+        </p>
+        <button
+          class="btn btn-outline-secondary container fluid"
+          data-bs-toggle="modal"
+          data-bs-target="#generateArtModal"
+        >
+          Generate Art
+        </button>
+      </div>
+    </div>
+    {% if generated_response %}
+    <div class="card">
+      <h1 class="card-title text-center mt-3">Recently generated images</h1>
+      <div class="card-body d-flex justify-content-center alaign-items-center">
+        {% for image in generated_response %}
+        <div class="card mx-3 shadow">
+          <img src="{{ image.url }}" alt="generated art" class="card-img-top" />
+          <div
+            class="card-body d-flex justify-content-center alaign-items-center"
+          >
+            <a
+              href="{{ image.url }}"
+              class="btn btn-sm btn-outline-success mx-1"
+              target="_blank"
+              download
+            >
+              Download <i class="bi bi-cloud-download"></i>
+            </a>
+            <a
+              href=""
+              class="btn btn-sm btn-outline-primary mx-1"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Add to your collection"
+              >Save <i class="bi bi-download"></i
+            ></a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title text-center mt-3">
+          Generated images will appear here
+        </h1>
+      </div>
+    </div>
+    {% endif %}
   </div>
 </div>
 

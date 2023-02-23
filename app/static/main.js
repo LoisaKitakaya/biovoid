@@ -23,10 +23,14 @@ const generateArt = () => {
   generateForm.submit();
 };
 
+const photoToArt = () => {
+  const generateForm = document.getElementById("photo-to-art-form");
+  generateForm.submit();
+};
+
 const downloadImage = (url, fileName) => {
   var link = document.createElement("a");
   link.setAttribute("href", url);
   link.setAttribute("download", fileName);
   link.click();
-}
-
+};
