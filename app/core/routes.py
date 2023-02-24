@@ -106,15 +106,8 @@ def sign_in():
 
             login_user(this_user, remember=remember)
 
-            if current_user.role == "superuser":
-
-                flash("Logged in successfully.", "message")
-                return redirect(url_for('core.admin'))
-            
-            else:
-
-                flash("Logged in successfully.", "message")
-                return redirect(url_for('site.home'))
+            flash("Logged in successfully.", "message")
+            return redirect(url_for('site.home'))
 
     return render_template('admin/sign_in.html')
 
