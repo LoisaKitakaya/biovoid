@@ -61,18 +61,20 @@
         <h1>Easily create stunning AI generated artwork</h1>
         <br />
         <p>
-          Looking for the perfect AI art generator for anime, illustrations, and
-          more? Look no further than imgcreator.ai.
+          Looking for the perfect AI art generator for your artistic tastes?
+          Look no further than bio<span class="text-danger">V</span>oid.
         </p>
         <br />
         <p>
-          Our powerful AI technology is capable of generating stunning artwork
-          in a variety of styles, from anime and illustrations to abstract
-          designs and more. Give it a try now and see the limitless
-          possibilities of artificial intelligence at work.
+          Using powerful AI technology you are capable of generating stunning
+          artwork in a variety of styles, from Renaissance art style, Ukiyo-e
+          style to Expressionism and more. Give it a try now and see the
+          limitless possibilities of artificial intelligence at work.
         </p>
         <br />
-        <a href="">Learn More <i class="bi bi-arrow-right-short"></i></a>
+        <a href="{{ url_for('site.generate_art') }}"
+          >Learn More <i class="bi bi-arrow-right-short"></i
+        ></a>
         <br />
       </div>
       <img
@@ -85,21 +87,44 @@
     <div class="d-flex my-3 justify-content-space-between align-items-center">
       <div class="px-5">
         <p class="text-primary">ADVANCED ALGORITHMS</p>
-        <h1>AI Generated Images with facial enhancement</h1>
+        <h1>AI Generated art from uploaded images</h1>
+        <br />
+        <p>Transform an image into stunning, AI-generated art.</p>
         <br />
         <p>
-          Transform your photos into stunning, AI-generated images with facial
-          enhancement.
+          Using powerful AI technology you are able to edit and enhance existing
+          images to create new art. Try it now and see the magic of artificial
+          intelligence at work on your photos.
         </p>
+        <br />
+        <a href="{{ url_for('site.photo_to_art') }}"
+          >Learn More <i class="bi bi-arrow-right-short"></i
+        ></a>
+        <br />
+      </div>
+      <img
+        class="mx-5"
+        src="https://www.zmo.ai/wp-content/uploads/2023/01/Splash-ink.webp"
+        alt="image/art edited and re-generated using AI"
+        style="width: 512px"
+      />
+    </div>
+    <div class="d-flex my-3 justify-content-space-between align-items-center">
+      <div class="px-5">
+        <p class="text-primary">DIFFERENT VARIATIONS</p>
+        <h1>AI Generated variations of an uploaded image</h1>
+        <br />
+        <p>Get to see the different possible variations of an image.</p>
         <br />
         <p>
-          Our powerful AI technology is able to analyze and enhance facial
-          features, resulting in lifelike, natural-looking images that will make
-          you look and feel your best. Try it now and see the magic of
-          artificial intelligence at work on your photos.
+          Using powerful AI technology you are able to generate different
+          variations of an image you upload. Try it now and see how different
+          your image could be__the magic of artificial intelligence.
         </p>
         <br />
-        <a href="">Learn More <i class="bi bi-arrow-right-short"></i></a>
+        <a href="{{ url_for('site.image_variation') }}"
+          >Learn More <i class="bi bi-arrow-right-short"></i
+        ></a>
         <br />
       </div>
       <img
@@ -122,7 +147,7 @@
               aria-expanded="false"
               aria-controls="flush-collapseOne"
             >
-              Accordion Item #1
+              What is AI art?
             </button>
           </h2>
           <div
@@ -132,9 +157,20 @@
             data-bs-parent="#accordionFlushExample"
           >
             <div class="accordion-body">
-              Placeholder content for this accordion, which is intended to
-              demonstrate the <code>.accordion-flush</code> class. This is the
-              first item's accordion body.
+              <p>
+                AI art refers to artwork created with the use of artificial
+                intelligence (AI) techniques, including machine learning
+                algorithms, computer vision, and natural language processing. AI
+                art can take many different forms, including visual art, music,
+                literature, and performance art.
+              </p>
+              <p>
+                There are different approaches to creating AI art, including
+                generative art, where the AI system generates new artwork based
+                on a set of rules or parameters provided by the artist, and
+                style transfer, where an AI system uses neural networks to
+                transfer the style of one artwork onto another.
+              </p>
             </div>
           </div>
         </div>
@@ -148,7 +184,7 @@
               aria-expanded="false"
               aria-controls="flush-collapseTwo"
             >
-              Accordion Item #2
+              How can artists use AI in their work?
             </button>
           </h2>
           <div
@@ -158,10 +194,50 @@
             data-bs-parent="#accordionFlushExample"
           >
             <div class="accordion-body">
-              Placeholder content for this accordion, which is intended to
-              demonstrate the <code>.accordion-flush</code> class. This is the
-              second item's accordion body. Let's imagine this being filled with
-              some actual content.
+              <p>
+                Artists can use AI in their work in a variety of ways,
+                including:
+              </p>
+              <ol>
+                <li>
+                  <strong>Generative art:</strong> Artists can use AI algorithms
+                  to create new, unique artworks that are generated based on a
+                  set of rules or parameters provided by the artist. This can
+                  include anything from computer-generated music to visual art.
+                </li>
+                <li>
+                  <strong>Style transfer:</strong> Artists can use AI algorithms
+                  to transfer the style of one artwork onto another. For
+                  example, an artist might take a photograph and use an AI
+                  system to apply the style of a famous painting to it.
+                </li>
+                <li>
+                  <strong>Data visualization:</strong> Artists can use AI
+                  algorithms to analyze and visualize large data sets, creating
+                  visual representations of complex information.
+                </li>
+                <li>
+                  <strong>Interactive installations:</strong> Artists can create
+                  interactive installations that use AI algorithms to respond to
+                  the movements or actions of viewers, creating an immersive and
+                  engaging experience.
+                </li>
+                <li>
+                  <strong>Augmented reality:</strong> Artists can use AI
+                  algorithms to create augmented reality experiences that blend
+                  the physical and digital worlds.
+                </li>
+                <li>
+                  <strong>Digital restoration:</strong> AI algorithms can be
+                  used to restore old or damaged artworks, helping to preserve
+                  them for future generations.
+                </li>
+              </ol>
+              <p>
+                Overall, artists can use AI as a tool to expand their creative
+                possibilities and push the boundaries of what is possible in the
+                world of art.
+              </p>
             </div>
           </div>
         </div>
@@ -175,7 +251,7 @@
               aria-expanded="false"
               aria-controls="flush-collapseThree"
             >
-              Accordion Item #3
+              What is an artist's role in AI generated art?
             </button>
           </h2>
           <div
@@ -185,12 +261,152 @@
             data-bs-parent="#accordionFlushExample"
           >
             <div class="accordion-body">
-              Placeholder content for this accordion, which is intended to
-              demonstrate the <code>.accordion-flush</code> class. This is the
-              third item's accordion body. Nothing more exciting happening here
-              in terms of content, but just filling up the space to make it
-              look, at least at first glance, a bit more representative of how
-              this would look in a real-world application.
+              <p>
+                An artist's role in AI-generated art can vary depending on the
+                approach they take and the level of involvement they have in the
+                creation of the artwork. Here are a few examples:
+              </p>
+              <ol>
+                <li>
+                  <strong>Creating the algorithm:</strong> An artist can play an
+                  active role in the creation of AI-generated art by designing
+                  and programming the algorithm that generates the artwork. This
+                  requires a strong understanding of AI and programming, as well
+                  as a creative vision for how the algorithm should work.
+                </li>
+                <li>
+                  <strong>Curating the output:</strong> In some cases, an artist
+                  may use an existing AI algorithm to generate art but play an
+                  active role in curating the output. This involves selecting
+                  the best pieces from the algorithm's output and deciding how
+                  to present them.
+                </li>
+                <li>
+                  <strong>Providing inspiration:</strong> Even when an artist is
+                  not directly involved in the creation of AI-generated art,
+                  they can still play an important role by providing inspiration
+                  and guiding the overall vision for the project.
+                </li>
+                <li>
+                  <strong>Contextualizing the work:</strong> No matter what
+                  level of involvement an artist has in the creation of
+                  AI-generated art, they play a critical role in contextualizing
+                  the work and helping viewers understand its meaning and
+                  significance. This can involve writing about the artwork,
+                  explaining the technology behind it, and putting it in the
+                  context of broader artistic movements and themes.
+                </li>
+              </ol>
+              <p>
+                In short, an artist's role in AI-generated art can be varied and
+                multifaceted, but ultimately, they bring a creative vision and
+                contextualization to the work that is essential for its success.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingFour">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseFour"
+              aria-expanded="false"
+              aria-controls="flush-collapseFour"
+            >
+              Do I own the AI art I generated & created?
+            </button>
+          </h2>
+          <div
+            id="flush-collapseFour"
+            class="accordion-collapse collapse"
+            aria-labelledby="flush-headingFour"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <p>
+                The answer is yes. You do own any and all AI generated art, so
+                long as you are the one who created it.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingFive">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseFive"
+              aria-expanded="false"
+              aria-controls="flush-collapseFive"
+            >
+              Can I use AI generated art for commercial purposes?
+            </button>
+          </h2>
+          <div
+            id="flush-collapseFive"
+            class="accordion-collapse collapse"
+            aria-labelledby="flush-headingFive"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <p>
+                You can use AI generated art form commercial application. That
+                is only if you are the sole creator of the AI generated art.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingSix">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseSix"
+              aria-expanded="false"
+              aria-controls="flush-collapseSix"
+            >
+              Can I create any kind of content using the AI art generator?
+            </button>
+          </h2>
+          <div
+            id="flush-collapseSix"
+            class="accordion-collapse collapse"
+            aria-labelledby="flush-headingSix"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <p>
+                In regards to <strong>art format</strong>, the AI model is
+                capable of generating a wide range of images, including those
+                that depict complex scenes and objects that have not been seen
+                before. However, the range of art that can be generated is
+                limited to images that can be represented in a two-dimensional
+                format.
+              </p>
+              <p>
+                In other words, the AI model is limited to images and does not
+                extend to other forms of art, such as music, video, or
+                interactive installations.
+              </p>
+              <p>
+                In regards to
+                <strong>legal and ethical considerations</strong>, the AI model
+                is capable of generating a wide range of images, including those
+                that depict nudity or graphic content. However, it is important
+                to keep in mind that the use of such images may be inappropriate
+                or even illegal, depending its intended use.
+              </p>
+              <p>
+                The AI model is a tool that generates images based on textual
+                input, and it does not have a built-in capability to
+                differentiate between appropriate and inappropriate content. As
+                the user, it is your responsibility to ensure that the content
+                you are creating is legal and appropriate for its intended use.
+              </p>
             </div>
           </div>
         </div>

@@ -17,6 +17,7 @@ from app.site import bp as site_blueprint
 # app models
 from app.models.users import User
 from app.models.art import Image
+from app.models.subscription import Account, Payment
 
 def create_app(config_class=Config):
 
