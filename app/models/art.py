@@ -1,5 +1,4 @@
 from app.extensions import db
-from datetime import datetime
 
 class Image(db.Model):
 
@@ -8,7 +7,6 @@ class Image(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     image_name = db.Column(db.String(100), unique=True, nullable=False)
     image_url = db.Column(db.String(300), unique=True, nullable=False)
-    created_on = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     def __repr__(self) -> str:
         
