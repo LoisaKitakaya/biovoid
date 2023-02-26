@@ -33,6 +33,11 @@ const imageVariation = () => {
   generateForm.submit();
 };
 
+const uploadImage = () => {
+  const uploadForm = document.getElementById("image-upload-form");
+  uploadForm.submit();
+};
+
 const downloadImage = (url, fileName) => {
   var link = document.createElement("a");
   link.setAttribute("href", url);

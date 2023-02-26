@@ -1,5 +1,9 @@
+import config
+from uuid import uuid4
 from app.site import bp
+import cloudinary.uploader
 from app.extensions import db
+from app.models.art import Image
 from app.site.dall_e import AIArtGenerator
 from app.models.subscription import Account
 from flask_login import login_required, current_user
@@ -263,9 +267,62 @@ def image_variation():
 @bp.route('/app/upload_image/', methods=['POST'])
 def upload_image():
 
-    pass
+    if request.method == 'POST':
 
-@bp.route('/app/delete_image/', methods=['POST'])
-def delete_image():
+        image = request.files['image']
+        image_name = request.form.get('image_name')
 
-    pass
+        try:
+
+            image_url = cloudinary.uploader.upload(image)
+
+        except Exception as e:
+
+            flash(f"Error: {str(e)}", "error")
+            return None
+        
+        else:
+
+            art = Image(
+                public_id=str(uuid4().hex),
+                user_id=current_user.id,
+                image_name=image_name,
+                image_url=image_url['secure_url']
+            )
+
+            try:
+
+                db.session.add(art)
+
+            except Exception as e:
+
+                flash(f"Error: {str(e)}", "error")
+                return None
+            
+            else:
+
+                db.session.commit()
+                flash(f"Successfully added art to gallery.", "message")
+
+        return redirect(url_for('core.admin'))
+
+@bp.route('/app/delete_image/<public_id>/')
+def delete_image(public_id):
+
+    image = Image.query.filter_by(public_id=public_id).first()
+
+    try:
+
+        db.session.delete(image)
+
+    except Exception as e:
+
+        flash(f"Error: {str(e)}", "error")
+        return redirect(url_for('core.admin'))
+    
+    else:
+
+        db.session.commit()
+
+        flash("Image deleted successfully.", "message")
+        return redirect(url_for('core.admin'))

@@ -76,3 +76,67 @@
   </div>
 </div>
 <!-- create user modal -->
+
+<!-- upload image url -->
+<div
+  class="modal fade"
+  id="uploadImageModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="uploadImageModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadImageModalLabel">Create new user</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          action="{{ url_for('site.upload_image') }}"
+          enctype="multipart/form-data"
+          method="post"
+          id="image-upload-form"
+        >
+          <div class="mb-3">
+            <label for="image_name" class="form-label">Image name</label>
+            <input
+              type="text"
+              name="image_name"
+              class="form-control"
+              placeholder="Name of the art object"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label"
+              >Image to upload</label
+            >
+            <input
+              class="form-control"
+              name="image"
+              type="file"
+              id="formFile"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success container-fluid"
+          onclick="uploadImage()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- upload image url -->

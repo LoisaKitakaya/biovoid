@@ -206,18 +206,34 @@ def create_user():
                 flash("User account created successfully.", "message")
                 return redirect(url_for('core.admin'))
         
-@bp.route("/delete_user/<public_id>/", methods=['GET', 'POST'])
+@bp.route("/delete_user/<public_id>/")
 def delete_user(public_id):
 
     user = User.query.filter_by(public_id=public_id).first()
+    account = Account.query.filter_by(user_id=user.id).first()
+
+    try:
+
+        db.session.delete(account)
+
+    except Exception as e:
+
+        flash(f"Error: {str(e)}", "error")
+        return redirect(url_for('core.admin'))
+    
+    else:
+
+        db.session.commit()
+
+        flash("User account deleted successfully.", "message")
 
     try:
 
         db.session.delete(user)
 
-    except:
+    except Exception as e:
 
-        flash("Something went wrong.", "error")
+        flash(f"Error: {str(e)}", "error")
         return redirect(url_for('core.admin'))
     
     else:
