@@ -116,9 +116,17 @@
       </ul>
       <div class="d-flex">
         {% if this_user.is_authenticated %}
-        <button disabled class="mx-3 btn btn-sm btn-outline-success">
+        <button disabled class="btn btn-sm btn-outline-success">
           <strong>Logged in as: {{ this_user.username }}</strong>
         </button>
+        <a
+          href=""
+          class="btn btn-sm btn-outline-primary mx-3"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          title="Current subscription: {{ this_account.subscription }}"
+          >Upgrade</a
+        >
         <a
           href="{{ url_for('core.sign_out') }}"
           class="btn btn-sm btn-outline-danger"

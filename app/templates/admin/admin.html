@@ -32,15 +32,15 @@
       <li class="nav-item" role="presentation">
         <button
           class="nav-link"
-          id="image-tab"
+          id="account-tab"
           data-bs-toggle="tab"
-          data-bs-target="#image"
+          data-bs-target="#account"
           type="button"
           role="tab"
-          aria-controls="image"
+          aria-controls="account"
           aria-selected="false"
         >
-          Gallery
+          User Subscriptions
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -124,13 +124,41 @@
       </div>
       <div
         class="tab-pane fade mt-3 px-3"
-        id="image"
+        id="account"
         role="tabpanel"
-        aria-labelledby="image-tab"
+        aria-labelledby="account-tab"
       >
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, doloribus.
-        Sapiente minima error accusamus nam neque provident odio ad, vitae quasi
-        earum illum natus quisquam modi placeat at eum harum?
+        <table
+          class="table table-striped table-hover table-borderless caption-top text-center"
+        >
+          <caption>
+            List of user Subscriptions
+          </caption>
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">User id</th>
+              <th scope="col">Public id</th>
+              <th scope="col">Subscription</th>
+              <th scope="col">Gen count</th>
+              <th scope="col">No. of Images</th>
+            </tr>
+          </thead>
+          {% if all_accounts %}
+          <tbody>
+            {% for account in all_accounts %}
+            <tr>
+              <td>{{ account.id }}</td>
+              <td>{{ account.user_id }}</td>
+              <td>{{ account.public_id }}</td>
+              <td>{{ account.subscription }}</td>
+              <td>{{ account.generation_count }}</td>
+              <td>{{ account.number_of_images }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          {% endif %}
+        </table>
       </div>
       <div
         class="tab-pane fade mt-3 px-3"

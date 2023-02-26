@@ -1,5 +1,51 @@
-<footer class="text-center p-5 fs-4">
-  <p>
-    &copy; 2023 bio<span class="text-danger">V</span>oid. All rights reserved.
-  </p>
+<footer class="pt-5 container-fluid">
+  <div class="container">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h1 style="font-size: 80px">
+          bio<span class="text-danger">V</span>oid
+        </h1>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <div class="d-flex flex-column">
+          <a href="{{ url_for('site.generate_art') }}">Text to AI art</a>
+          <a href="{{ url_for('site.photo_to_art') }}">Image to AI art</a>
+          <a href="{{ url_for('site.image_variation') }}">AI image variation</a>
+        </div>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <div class="d-flex flex-column">
+          <a href="">API</a>
+          <a href="">About</a>
+          <a href="">Pricing</a>
+          <a href="">Contact us</a>
+        </div>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <div class="d-flex flex-column">
+          <a href="">Privacy policy</a>
+          <a href="">Terms & conditions</a>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-5">
+      <p>
+        &copy; 2023 bio<span class="text-danger">V</span>oid. All rights
+        reserved.
+      </p>
+      <div class="d-flex">
+        <a
+          href="https://www.linkedin.com/in/loisa-kitakaya-37ba99212/"
+          class="text-primary mx-3 fs-5"
+          ><i class="bi bi-linkedin"></i
+        ></a>
+        <a href="https://github.com/LoisaKitakaya" class="text-dark fs-5"
+          ><i class="bi bi-github"></i
+        ></a>
+      </div>
+    </div>
+  </div>
 </footer>
