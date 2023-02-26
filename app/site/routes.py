@@ -14,7 +14,7 @@ response = {"data": []}
 ACCOUNT_MANAGEMENT = {
     "free_account": {
         "tier": "Free",
-        "max_count": 4,
+        "max_count": 5,
         "max_images": 1,
         "quality": "256x256"
     },
@@ -26,14 +26,14 @@ ACCOUNT_MANAGEMENT = {
     },
     "standard_account": {
         "tier": "Standard",
-        "max_count": 20,
+        "max_count": 25,
         "max_images": 3,
         "quality": "512x512"
     },
     "pro_account": {
         "tier": "Pro",
-        "max_count": 50,
-        "max_images": 5,
+        "max_count": 40,
+        "max_images": 4,
         "quality": "1024x1024"
     }
 }
@@ -63,6 +63,18 @@ def gallery():
         this_user=current_user,
         this_account=user_account,
         my_gallery=all_images,
+    )
+
+@bp.route('/pricing/', methods=['GET'])
+def pricing():
+
+    user_account = Account.query.filter_by(user_id=current_user.id)\
+                    .first() if current_user.is_authenticated else None
+
+    return render_template(
+        'site/pricing.html',
+        this_user=current_user,
+        this_account=user_account,
     )
 
 @bp.route('/app/generate_art/', methods=['GET', 'POST'])

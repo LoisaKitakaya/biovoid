@@ -103,10 +103,9 @@
               <a class="dropdown-item" href="">About</a>
             </li>
             <li>
-              <a class="dropdown-item" href="">API</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="">Pricing</a>
+              <a class="dropdown-item" href="{{ url_for('site.pricing') }}"
+                >Pricing</a
+              >
             </li>
           </ul>
         </li>
@@ -120,11 +119,11 @@
           <strong>Logged in as: {{ this_user.username }}</strong>
         </button>
         <a
-          href=""
+          href="{{ url_for('site.pricing') }}"
           class="btn btn-sm btn-outline-primary mx-3"
           data-bs-toggle="tooltip"
           data-bs-placement="bottom"
-          title="Current subscription: {{ this_account.subscription }}"
+          title="Current package: {{ this_account.subscription }}"
           >Upgrade</a
         >
         <a

@@ -1,6 +1,6 @@
 <footer class="pt-5 container-fluid">
   <div class="container">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between flex-wrap">
       <div>
         <h1 style="font-size: 80px">
           bio<span class="text-danger">V</span>oid
@@ -17,9 +17,8 @@
       <div>
         <h4>Resources</h4>
         <div class="d-flex flex-column">
-          <a href="">API</a>
           <a href="">About</a>
-          <a href="">Pricing</a>
+          <a href="{{ url_for('site.pricing') }}">Pricing</a>
           <a href="">Contact us</a>
         </div>
       </div>
@@ -31,10 +30,13 @@
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-between align-items-center mt-5">
+    <div
+      class="d-flex justify-content-between flex-wrap align-items-center mt-5"
+    >
       <p>
-        &copy; 2023 bio<span class="text-danger">V</span>oid. All rights
-        reserved.
+        &copy; 2023
+        <a href="https://freedomloisa.netlify.app/">Freedom Loisa</a>. All
+        rights reserved.
       </p>
       <div class="d-flex">
         <a

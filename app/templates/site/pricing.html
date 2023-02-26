@@ -1,0 +1,268 @@
+{% extends 'base.html' %}
+
+<!-- title -->
+{% block title %} Pricing {% endblock %}
+<!-- title -->
+
+<!-- body -->
+{% block body %}
+<!-- navbar -->
+{% include 'navbar.html' %}
+<!-- navbar -->
+
+<!--  -->
+<div id="app" class="container-fluid">
+  <div class="container py-5">
+    <h1 class="text-center">Pricing</h1>
+    <h4 class="text-center mb-5">
+      How it works, is you buy a package that has a given number of
+      <span class="text-decoration-underline">generations counts</span>. What
+      are these
+      <span class="text-decoration-underline">generations counts</span>? They
+      are the amount of times you can generate an image or images.
+    </h4>
+    <div class="d-flex justify-content-evenly flex-wrap">
+      <div class="card m-3 shadow" style="width: 40%">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="card-title">Free</h2>
+            <h2 class="card-title text-secondary fw-bold">$0</h2>
+          </div>
+          <p class="mt-3">
+            Best for trying out bio<span class="text-danger">V</span>oid
+          </p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <span
+                >Generation count
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the number of times you can generate AI art."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">Max: 5</span>
+            </li>
+            <li class="list-group-item">
+              <span
+                >Images per generation
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the number of images you can generate in one generation count."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">Max: 1</span>
+            </li>
+            <li class="list-group-item">
+              <span
+                >Image resolution
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the resolution of the images you generate."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">256x256</span>
+            </li>
+          </ul>
+          <button class="btn btn-secondary container-fluid mt-3">
+            Choose Plan
+          </button>
+        </div>
+      </div>
+      <div class="card m-3 shadow" style="width: 40%">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="card-title">Basic</h2>
+            <h2 class="card-title text-secondary fw-bold">$2</h2>
+          </div>
+          <p class="mt-3">
+            Best if you don't like free stuff but are not an artist
+          </p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <span
+                >Generation count
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the number of times you can generate AI art."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">Max: 10</span>
+            </li>
+            <li class="list-group-item">
+              <span
+                >Images per generation
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the number of images you can generate in one generation count."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">Max: 2</span>
+            </li>
+            <li class="list-group-item">
+              <span
+                >Image resolution
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the resolution of the images you generate."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">512x512</span>
+            </li>
+          </ul>
+          <a href="" class="btn btn-primary container-fluid mt-3"
+            >Choose Plan</a
+          >
+        </div>
+      </div>
+      <div class="card m-3 shadow" style="width: 40%">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="card-title">Standard</h2>
+            <h2 class="card-title text-secondary fw-bold">$3</h2>
+          </div>
+          <p class="mt-3">Most users subscribe to this package</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <span
+                >Generation count
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the number of times you can generate AI art."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">Max: 25</span>
+            </li>
+            <li class="list-group-item">
+              <span
+                >Images per generation
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the number of images you can generate in one generation count."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">Max: 3</span>
+            </li>
+            <li class="list-group-item">
+              <span
+                >Image resolution
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the resolution of the images you generate."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">512x512</span>
+            </li>
+          </ul>
+          <a href="" class="btn btn-primary container-fluid mt-3"
+            >Choose Plan</a
+          >
+        </div>
+      </div>
+      <div class="card m-3 shadow" style="width: 40%">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="card-title">Pro</h2>
+            <h2 class="card-title text-secondary fw-bold">$6</h2>
+          </div>
+          <p class="mt-3">Most loved package by actual artists</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <span
+                >Generation count
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the number of times you can generate AI art."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">Max: 40</span>
+            </li>
+            <li class="list-group-item">
+              <span
+                >Images per generation
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the number of images you can generate in one generation count."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">Max: 4</span>
+            </li>
+            <li class="list-group-item">
+              <span
+                >Image resolution
+                <i
+                  class="bi bi-info-circle-fill text-primary"
+                  style="cursor: pointer"
+                  data-bs-toggle="popover"
+                  data-bs-trigger="hover focus"
+                  data-bs-content="This is the resolution of the images you generate."
+                ></i
+              ></span>
+              <br />
+              <span class="text-secondary fw-bold">1024x1024</span>
+            </li>
+          </ul>
+          <a href="" class="btn btn-success container-fluid mt-3"
+            >Choose Plan</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+<!-- notifications -->
+<div class="site-alerts">{% include 'notifications.html' %}</div>
+<!-- notifications -->
+
+<!-- content -->
+
+<!-- footer -->
+{% include 'footer.html' %}
+<!-- footer -->
+{% endblock %}
+<!-- body -->
