@@ -66,15 +66,38 @@ def create_app(config_class=Config):
 
             db.session.add(super_user)
 
-        except:
+        except Exception as e:
 
-            click.secho('Something went wrong', fg="red")
+            click.secho(f"Error: {str(e)}", fg="red")
             return None
 
         else:
 
             db.session.commit()
-            click.secho('User created successfully', fg="green")
+            click.secho('Superuser created successfully', fg="green")
+
+        this_user = User.query.filter_by(email=email).first()
+
+        admin_account = Account(
+            public_id=str(uuid4().hex),
+            user_id=this_user.id,
+            subscription="Pro",
+            number_of_images=4
+        )
+
+        try:
+
+            db.session.add(admin_account)
+
+        except Exception as e:
+
+            click.secho(f"Error: {str(e)}", fg="red")
+            return None
+        
+        else:
+
+            db.session.commit()
+            click.secho(f"Superuser account created successfully", fg="green")
 
     # login manager callback
     @login_manager.user_loader
