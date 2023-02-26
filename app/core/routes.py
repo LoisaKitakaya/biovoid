@@ -4,6 +4,7 @@ from app.core import bp
 from app.extensions import db
 from app.models.art import Image
 from app.models.users import User
+from app.models.subscription import Account, Payment
 from app.core.decorators import admin_required
 from flask import render_template, redirect, url_for, flash, request
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -16,11 +17,15 @@ def admin():
 
     users = User.query.all()
     images = Image.query.all()
+    accounts = Account.query.all()
+    user_account = Account.query.filter_by(user_id=current_user.id).first()
 
     return render_template(
         'admin/admin.html',
         this_user=current_user,
+        this_account=user_account,
         all_users=users,
+        all_accounts=accounts,
         gallery=images,
     )
 
@@ -60,9 +65,9 @@ def sign_up():
 
             db.session.add(user)
 
-        except:
+        except Exception as e:
 
-            flash("Something went wrong.", "error")
+            flash(f"Error: {str(e)}.", "error")
             return redirect(url_for('core.sign_up'))
 
         else:
@@ -70,7 +75,28 @@ def sign_up():
             db.session.commit()
 
             flash("User created successfully.", "message")
-            return redirect(url_for('core.sign_in'))
+
+            this_user = User.query.filter_by(email=email).first()
+
+            user_account = Account(
+                public_id=str(uuid4().hex),
+                user_id=this_user.id
+            )
+
+            try:
+
+                db.session.add(user_account)
+
+            except Exception as e:
+
+                flash(f"Error: {str(e)}", "error")
+                return redirect(url_for('core.sign_up'))
+            
+            else:
+
+                db.session.commit()
+                flash("User account created successfully.", "message")
+                return redirect(url_for('core.sign_in'))
         
     return render_template('admin/sign_up.html')
 
@@ -147,9 +173,9 @@ def create_user():
 
             db.session.add(super_user)
 
-        except:
+        except Exception as e:
 
-            flash("Something went wrong.", "error")
+            flash(f"Error: {str(e)}", "error")
             return redirect(url_for('core.admin'))
 
         else:
@@ -157,7 +183,28 @@ def create_user():
             db.session.commit()
 
             flash("User created successfully.", "message")
-            return redirect(url_for('core.admin'))
+            
+            this_user = User.query.filter_by(email=email).first()
+
+            user_account = Account(
+                public_id=str(uuid4().hex),
+                user_id=this_user.id
+            )
+
+            try:
+
+                db.session.add(user_account)
+
+            except Exception as e:
+
+                flash(f"Error: {str(e)}", "error")
+                return redirect(url_for('core.admin'))
+            
+            else:
+
+                db.session.commit()
+                flash("User account created successfully.", "message")
+                return redirect(url_for('core.admin'))
         
 @bp.route("/delete_user/<public_id>/", methods=['GET', 'POST'])
 def delete_user(public_id):
