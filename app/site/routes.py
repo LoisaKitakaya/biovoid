@@ -50,6 +50,21 @@ def home():
         this_account = user_account,
     )
 
+@bp.route('/gallery/', methods=['GET'])
+def gallery():
+
+    user_account = Account.query.filter_by(user_id=current_user.id)\
+                    .first() if current_user.is_authenticated else None
+    
+    all_images = Image.query.all()
+
+    return render_template(
+        'site/gallery.html',
+        this_user=current_user,
+        this_account=user_account,
+        my_gallery=all_images,
+    )
+
 @bp.route('/app/generate_art/', methods=['GET', 'POST'])
 @login_required
 def generate_art():

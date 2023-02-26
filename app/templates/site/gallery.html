@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+<!-- title -->
+{% block title %} Gallery {% endblock %}
+<!-- title -->
+
+<!-- body -->
+{% block body %}
+<!-- navbar -->
+{% include 'navbar.html' %}
+<!-- navbar -->
+
+<!--  -->
+<div id="app" class="container-fluid">
+  <div class="container py-5">
+    <h1 class="text-center mb-5">A display of art generated on this platform</h1>
+    <div class="d-flex justify-content-between flex-wrap">
+      {% if my_gallery %}
+      <!--  -->
+      {% for image in my_gallery %}
+      <img
+        src="{{ image.image_url }}"
+        alt="{{ image.image_name }}"
+        class="img-fluid img-thumbnail rounded shadow mb-5"
+        style="width: 256px"
+      />
+      {% endfor %}
+      <!--  -->
+      {% endif %}
+    </div>
+  </div>
+</div>
+<!--  -->
+
+<!-- notifications -->
+<div class="site-alerts">{% include 'notifications.html' %}</div>
+<!-- notifications -->
+
+<!-- content -->
+
+<!-- footer -->
+{% include 'footer.html' %}
+<!-- footer -->
+{% endblock %}
+<!-- body -->

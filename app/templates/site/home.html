@@ -27,7 +27,11 @@
       class="d-flex justify-content-center align-items-center"
       style="margin-top: 5rem"
     >
-      <a href="" class="btn btn-lg btn-success mx-3">AI Art Gallery</a>
+      <a
+        href="{{ url_for('site.gallery') }}"
+        class="btn btn-lg btn-success mx-3"
+        >AI Art Gallery</a
+      >
       <a
         href="{{ url_for('site.generate_art') }}"
         class="btn btn-lg btn-primary mx-3"
