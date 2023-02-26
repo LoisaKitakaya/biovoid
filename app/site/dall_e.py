@@ -22,9 +22,9 @@ class AIArtGenerator:
           size=self.size
         )
 
-      except:
+      except Exception as e:
 
-        flash("Something went wrong", "error")
+        flash(f"Error: {str(e)}", "error")
         return None
 
       response = generate['data']
@@ -42,9 +42,9 @@ class AIArtGenerator:
           size=self.size
         )
 
-      except:
+      except Exception as e:
 
-        flash("Something went wrong", "error")
+        flash(f"Error: {str(e)}", "error")
         return None
 
       response = generate['data']
@@ -61,9 +61,9 @@ class AIArtGenerator:
           size=self.size
         )
 
-      except:
+      except Exception as e:
 
-        flash("Something went wrong", "error")
+        flash(f"Error: {str(e)}", "error")
         return None
 
       response = generate['data']
