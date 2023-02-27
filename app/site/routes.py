@@ -1,8 +1,11 @@
+import os
 import config
 from uuid import uuid4
 from app.site import bp
 import cloudinary.uploader
 from app.extensions import db
+from flask_mail import Message
+from app.extensions import mail
 from app.models.art import Image
 from app.site.dall_e import AIArtGenerator
 from app.models.subscription import Account
@@ -63,6 +66,48 @@ def gallery():
         this_user=current_user,
         this_account=user_account,
         my_gallery=all_images,
+    )
+
+@bp.route('/contacts/', methods=['GET', 'POST'])
+def contacts():
+
+    user_account = Account.query.filter_by(user_id=current_user.id)\
+                    .first() if current_user.is_authenticated else None
+    
+    if request.method == 'POST':
+
+        subject = request.form.get('subject')
+        sender_email = request.form.get('sender_email')
+        message = request.form.get('message')
+
+        mail_body = f"{message} \n\nSent by: {sender_email}"
+
+        msg = Message(
+            subject=subject,
+            sender=os.environ.get('GMAIL_USERNAME'),
+            recipients=[os.environ.get('GMAIL_USERNAME')],
+            body=mail_body
+        )
+
+        try:
+
+            mail.send(msg)
+
+        except Exception as e:
+
+            flash(f"Error: {str(e)}", "error")
+            return None
+        
+        else:
+
+            flash("Message sent successfully", "message")
+            
+        return redirect(url_for('site.contacts'))
+
+    return render_template(
+        'site/contacts.html',
+        this_user=current_user,
+        this_account=user_account,
     )
 
 @bp.route('/pricing/', methods=['GET'])
