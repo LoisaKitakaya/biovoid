@@ -8,7 +8,7 @@ from flask import Flask
 from config import Config
 
 # extensions
-from app.extensions import db, migrate, login_manager
+from app.extensions import db, migrate, login_manager, mail
 
 # blueprints
 from app.core import bp as main_blueprint
@@ -28,6 +28,7 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
+    mail.init_app(app)
 
     # register blueprints here
     app.register_blueprint(main_blueprint)
