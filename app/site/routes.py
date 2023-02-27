@@ -155,12 +155,12 @@ def generate_art():
 
     if request.method == 'POST':
 
-        if current_count <= max_count:
+        if current_count < max_count:
 
             style = request.form.get('style')
             text_prompt = request.form.get('text_prompt')
 
-            prompt = f"style: {style}. Description: {text_prompt}"
+            prompt = text_prompt if style == 'Custom' else f"style: {style}. Description: {text_prompt}"
 
             image_object = AIArtGenerator(
                 prompt=prompt,
@@ -191,6 +191,7 @@ def generate_art():
         'site/app/generate_art.html',
         this_user=current_user,
         this_account=user_account,
+        max_count=max_count,
         generated_response=response['data']
     )
 
@@ -227,13 +228,13 @@ def photo_to_art():
 
     if request.method == 'POST':
             
-        if current_count <= max_count:
+        if current_count < max_count:
 
             style = request.form.get('style')
             text_prompt = request.form.get('text_prompt')
             image = request.files['image'].stream.read()
 
-            prompt = f"style: {style}. Description: {text_prompt}"
+            prompt = text_prompt if style == 'Custom' else f"style: {style}. Description: {text_prompt}"
 
             image_object = AIArtGenerator(
                 prompt=prompt,
@@ -264,6 +265,7 @@ def photo_to_art():
         'site/app/photo_to_art.html',
         this_user=current_user,
         this_account=user_account,
+        max_count=max_count,
         generated_response=response['data']
     )
 
@@ -300,7 +302,7 @@ def image_variation():
 
     if request.method == 'POST':
             
-        if current_count <= max_count:
+        if current_count < max_count:
 
             image = request.files['image'].stream.read()
 
@@ -333,6 +335,7 @@ def image_variation():
         'site/app/image_variation.html',
         this_user=current_user,
         this_account=user_account,
+        max_count=max_count,
         generated_response=response['data']
     )
 
