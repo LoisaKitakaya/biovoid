@@ -100,7 +100,9 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
-              <a class="dropdown-item" href="">Contact us</a>
+              <a class="dropdown-item" href="{{ url_for('site.contacts') }}"
+                >Contact us</a
+              >
             </li>
             <li>
               <a class="dropdown-item" href="{{ url_for('site.pricing') }}"
