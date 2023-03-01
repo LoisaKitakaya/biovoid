@@ -4,11 +4,39 @@ from app.core import bp
 from app.extensions import db
 from app.models.art import Image
 from app.models.users import User
-from app.models.subscription import Account, Payment
 from app.core.decorators import admin_required
+from app.models.subscription import Account, Payment
+from app.core.handle_payment import convert_currency, MakePayment
 from flask import render_template, redirect, url_for, flash, request
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
+
+ACCOUNT_MANAGEMENT = {
+    "free_account": {
+        "tier": "Free",
+        "max_count": 5,
+        "max_images": 1,
+        "quality": "256x256"
+    },
+    "basic_account": {
+        "tier": "Basic",
+        "max_count": 10,
+        "max_images": 2,
+        "quality": "512x512"
+    },
+    "standard_account": {
+        "tier": "Standard",
+        "max_count": 25,
+        "max_images": 3,
+        "quality": "512x512"
+    },
+    "pro_account": {
+        "tier": "Pro",
+        "max_count": 40,
+        "max_images": 4,
+        "quality": "1024x1024"
+    }
+}
 
 @bp.route('/admin/', methods=['GET', 'POST'])
 @login_required
@@ -250,3 +278,142 @@ def sign_out():
 
     flash("Logged out successfully.", "message")
     return redirect(url_for('core.sign_in'))
+
+@bp.route('/payment/<package>/', methods=['GET', 'POST'])
+@login_required
+def payment(package):
+
+    user_account = Account.query.filter_by(user_id=current_user.id).first()
+
+    page = package
+
+    if package == "free":
+
+        amount = convert_currency(0)
+
+    elif package == "basic":
+
+        amount = convert_currency(2)
+
+    elif package == "standard":
+
+        amount = convert_currency(3)
+
+    elif package == "pro":
+
+        amount = convert_currency(6)
+
+    if request.method == 'POST':
+
+        if package == "free":
+
+            user_account.subscription = ACCOUNT_MANAGEMENT["free_account"]['tier']
+            user_account.generation_count = 0
+
+            try:
+
+                db.session.commit()
+
+            except Exception as e:
+
+                flash(f"Error: {str(e)}", "error")
+                return None
+
+            else:
+
+                flash("You are now subscribed to the Free tier", "message")
+                return redirect(url_for('core.payment', package=package))
+
+        elif package == "basic":
+
+            mpesa_number = request.form.get('mpesa_number')
+            country_code = "254"
+            full_number = country_code + mpesa_number
+
+            payment_obj = MakePayment(tel_number=full_number, amount=1)
+
+            init_payment = payment_obj.mpesa_payment()
+            check_payment = payment_obj.payment_status()
+
+            user_account.subscription = ACCOUNT_MANAGEMENT["basic_account"]['tier']
+            user_account.generation_count = 0
+
+            try:
+
+                db.session.commit()
+
+            except Exception as e:
+
+                flash(f"Error: {str(e)}", "error")
+                return None
+
+            else:
+
+                flash("You are now subscribed to the Basic tier", "message")
+                return redirect(url_for('core.payment', package=package))
+
+        elif package == "standard":
+
+            mpesa_number = request.form.get('mpesa_number')
+            country_code = "254"
+            full_number = country_code + mpesa_number
+
+            payment_obj = MakePayment(tel_number=full_number, amount=1)
+
+            init_payment = payment_obj.mpesa_payment()
+            check_payment = payment_obj.payment_status()
+
+            user_account.subscription = ACCOUNT_MANAGEMENT["standard_account"]['tier']
+            user_account.generation_count = 0
+
+            try:
+
+                db.session.commit()
+
+            except Exception as e:
+
+                flash(f"Error: {str(e)}", "error")
+                return None
+
+            else:
+
+                flash("You are now subscribed to the Standard tier", "message")
+                return redirect(url_for('core.payment', package=package))
+
+        elif package == "pro":
+
+            mpesa_number = request.form.get('mpesa_number')
+            country_code = "254"
+            full_number = country_code + mpesa_number
+
+            payment_obj = MakePayment(tel_number=full_number, amount=1)
+
+            init_payment = payment_obj.mpesa_payment()
+            check_payment = payment_obj.payment_status()
+
+            user_account.subscription = ACCOUNT_MANAGEMENT["pro_account"]['tier']
+            user_account.generation_count = 0
+
+            try:
+
+                db.session.commit()
+
+            except Exception as e:
+
+                flash(f"Error: {str(e)}", "error")
+                return None
+
+            else:
+
+                flash("You are now subscribed to the Pro tier", "message")
+                return redirect(url_for('core.payment', package=package))
+
+        return redirect(url_for('core.payment'))
+
+    return render_template(
+        'site/payment.html',
+        this_user=current_user,
+        this_account=user_account,
+        this_amount=amount,
+        this_page=page,
+    )

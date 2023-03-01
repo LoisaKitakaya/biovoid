@@ -8,7 +8,6 @@ class Account(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     subscription = db.Column(db.String(50), nullable=False , default="Free")
     generation_count = db.Column(db.Integer, nullable=False, default=0)
-    number_of_images = db.Column(db.Integer, nullable=False, default=1)
     payment = db.relationship('Payment', backref='account_payment')
 
     def __repr__(self) -> str:

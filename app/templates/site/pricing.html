@@ -75,9 +75,12 @@
               <span class="text-secondary fw-bold">256x256</span>
             </li>
           </ul>
-          <button class="btn btn-secondary container-fluid mt-3">
+          <a
+            href="{{ url_for('core.payment', package='free') }}"
+            class="btn btn-secondary container-fluid mt-3"
+          >
             Choose Plan
-          </button>
+          </a>
         </div>
       </div>
       <div class="card m-3 shadow" style="width: 40%">
@@ -133,7 +136,9 @@
               <span class="text-secondary fw-bold">512x512</span>
             </li>
           </ul>
-          <a href="" class="btn btn-primary container-fluid mt-3"
+          <a
+            href="{{ url_for('core.payment', package='basic') }}"
+            class="btn btn-primary container-fluid mt-3"
             >Choose Plan</a
           >
         </div>
@@ -189,7 +194,9 @@
               <span class="text-secondary fw-bold">512x512</span>
             </li>
           </ul>
-          <a href="" class="btn btn-primary container-fluid mt-3"
+          <a
+            href="{{ url_for('core.payment', package='standard') }}"
+            class="btn btn-primary container-fluid mt-3"
             >Choose Plan</a
           >
         </div>
@@ -245,12 +252,36 @@
               <span class="text-secondary fw-bold">1024x1024</span>
             </li>
           </ul>
-          <a href="" class="btn btn-success container-fluid mt-3"
+          <a
+            href="{{ url_for('core.payment', package='pro') }}"
+            class="btn btn-success container-fluid mt-3"
             >Choose Plan</a
           >
         </div>
       </div>
     </div>
+    <span style="display: block; text-align: center; margin-top: 4rem">
+      <a href="https://intasend.com/security" target="_blank"
+        ><img
+          src="https://intasend-prod-static.s3.amazonaws.com/img/trust-badges/intasend-trust-badge-with-mpesa-hr-light.png"
+          width="375px"
+          alt="IntaSend Secure Payments (PCI-DSS Compliant)"
+      /></a>
+      <strong
+        ><a
+          style="
+            display: block;
+            color: #454545;
+            text-decoration: none;
+            font-size: 0.8em;
+            margin-top: 0.6em;
+          "
+          href="https://intasend.com/security"
+          target="_blank"
+          >Secured by IntaSend Payments</a
+        ></strong
+      >
+    </span>
   </div>
 </div>
 <!--  -->

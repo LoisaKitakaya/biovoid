@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+<!-- title -->
+{% block title %} Payment {% endblock %}
+<!-- title -->
+
+<!-- body -->
+{% block body %}
+<!-- navbar -->
+{% include 'navbar.html' %}
+<!-- navbar -->
+
+<!--  -->
+<div id="app" class="container-fluid">
+  <div class="container py-5">
+    <h1 class="text-center">Purchase this package</h1>
+    <h5 class="text-center">
+      Only M-Pesa payments accepted for now. Other payment options coming soon.
+    </h5>
+    <p class="text-center mb-5 fw-bold">
+      A prompt will be sent to your phone to confirm payment.
+    </p>
+    <div class="card mx-auto mb-3" style="width: 50%">
+      <div class="card-body">
+        <form
+          action="{{ url_for('core.payment', package=this_page) }}"
+          method="post"
+        >
+          {% if this_page == "free" %}
+          <!--  -->
+          {% else %}
+          <div class="mb-3">
+            <label for="mpesa_number" class="form-label"
+              >Enter your M-Pesa phone number</label
+            >
+            <div class="input-group">
+              <div class="input-group-text">+254</div>
+              <input
+                type="tel"
+                name="mpesa_number"
+                class="form-control"
+                placeholder="e.g. 725131828"
+              />
+            </div>
+          </div>
+          {% endif %}
+          <div class="mb-3">
+            <label for="amount" class="form-label">Package price</label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="number"
+                name="mpesa_amount"
+                value="{{ this_amount }}"
+                aria-label="payment amount"
+                disabled
+                readonly
+              />
+              <div class="input-group-text">KES</div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success container-fluid">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="text-center">
+      <a href="{{ url_for('site.pricing') }}"
+        ><i class="bi bi-arrow-left-short"></i> Back</a
+      >
+    </div>
+    <span style="display: block; text-align: center; margin-top: 2rem">
+      <a href="https://intasend.com/security" target="_blank"
+        ><img
+          src="https://intasend-prod-static.s3.amazonaws.com/img/trust-badges/intasend-trust-badge-with-mpesa-hr-light.png"
+          width="375px"
+          alt="IntaSend Secure Payments (PCI-DSS Compliant)"
+      /></a>
+      <strong
+        ><a
+          style="
+            display: block;
+            color: #454545;
+            text-decoration: none;
+            font-size: 0.8em;
+            margin-top: 0.6em;
+          "
+          href="https://intasend.com/security"
+          target="_blank"
+          >Secured by IntaSend Payments</a
+        ></strong
+      >
+    </span>
+  </div>
+</div>
+<!--  -->
+
+<!-- notifications -->
+<div class="site-alerts">{% include 'notifications.html' %}</div>
+<!-- notifications -->
+
+<!-- content -->
+
+<!-- footer -->
+{% include 'footer.html' %}
+<!-- footer -->
+{% endblock %}
+<!-- body -->

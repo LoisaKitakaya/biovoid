@@ -82,8 +82,7 @@ def create_app(config_class=Config):
         admin_account = Account(
             public_id=str(uuid4().hex),
             user_id=this_user.id,
-            subscription="Pro",
-            number_of_images=4
+            subscription="Pro"
         )
 
         try:
