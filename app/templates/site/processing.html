@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+<!-- title -->
+{% block title %} Payment Processing {% endblock %}
+<!-- title -->
+
+<!-- body -->
+{% block body %}
+<!-- navbar -->
+{% include 'navbar.html' %}
+<!-- navbar -->
+
+<!--  -->
+<div id="app" class="container-fluid">
+  <div class="container py-5">
+    <h1 class="text-center mb-5">Please wait as we process you payment</h1>
+    <div class="card mx-auto" style="width: 40%">
+      <div class="card-body">
+        {% if this_state == 'processing' %}
+        <div class="d-flex align-items-center">
+          <strong>Processing...</strong>
+          <div
+            class="spinner-border ms-auto text-success"
+            role="status"
+            aria-hidden="true"
+          ></div>
+        </div>
+        {% elif this_state == "complete" %}
+        <div class="d-flex align-items-center">
+          <strong>Complete</strong>
+          <div class="ms-auto text-success">
+            <i class="bi bi-check2-circle"></i>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+<!-- notifications -->
+<div class="site-alerts">{% include 'notifications.html' %}</div>
+<!-- notifications -->
+
+<!-- content -->
+
+<!-- footer -->
+{% include 'footer.html' %}
+<!-- footer -->
+{% endblock %}
+<!-- body -->

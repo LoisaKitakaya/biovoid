@@ -1,76 +1,57 @@
 import os
-import time
 import requests
 from flask import flash
 from intasend import APIService
 
 def convert_currency(quantity):
 
-    url = "https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency"
+    url = "https://currency-converter18.p.rapidapi.com/api/v1/convert"
 
-    querystring = {
-        "have": "USD",
-        "want": "KES",
-        "amount": str(quantity)
-    }
+    querystring = {"from":"USD","to":"KES","amount":str(quantity)}
 
     headers = {
         "X-RapidAPI-Key": "53261179d3msh4f625af6c821a4cp17aaa5jsn475301ddb7c1",
-        "X-RapidAPI-Host": "currency-converter-by-api-ninjas.p.rapidapi.com"
+        "X-RapidAPI-Host": "currency-converter18.p.rapidapi.com"
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
 
     amount = response.json()
-    return amount['new_amount']
+    new_amount = round(float(amount['result']['convertedAmount']))
+    
+    return str(new_amount)
 
-class MakePayment():
+token = os.environ.get('INTASEND_API_TOKEN')
+publishable_key = os.environ.get('INTASEND_PUBLISHABLE_KEY')
 
-    def __init__(self, tel_number, amount) -> None:
+def mpesa_payment(tel_number, amount):
+
+    service = APIService(token=token, publishable_key=publishable_key, live=True)
+
+    try:
+
+        response = service.collect.mpesa_stk_push\
+            (phone_number=int(tel_number),email=os.environ.get\
+            ('GMAIL_USERNAME'),amount=int(amount),narrative="Purchase")
         
-        self.tel_number = tel_number
-        self.amount = amount
+    except Exception as e:
 
-        token = os.environ.get('INTASEND_API_TOKEN')
-        publishable_key = os.environ.get('INTASEND_PUBLISHABLE_KEY')
+        flash(f"Error: {str(e)}", "error")
+        return None
 
-        self.token = token
-        self.publishable_key = publishable_key
+    return response
 
-        self.invoice_id = ''
+def payment_status(invoice_id):
 
-    def mpesa_payment(self):
+    service = APIService(token=token, publishable_key=publishable_key, live=True)
 
-        service = APIService(token=self.token, publishable_key=self.publishable_key)
+    try:
 
-        try:
+        status = service.collect.status(invoice_id=str(invoice_id))
 
-            response = service.collect.mpesa_stk_push\
-                (phone_number=int(self.tel_number),email=os.environ.get\
-                ('GMAIL_USERNAME'),amount=int(self.amount),narrative="Purchase")
-            
-        except Exception as e:
+    except Exception as e:
 
-            flash(f"Error: {str(e)}", "error")
-            return None
-        
-        else:
-
-            self.invoice_id = response['invoice']['invoice_id']
-
-        return response
-
-    def payment_status(self):
-
-        service = APIService(token=self.token, publishable_key=self.publishable_key)
-
-        try:
-
-            status = service.collect.status(invoice_id=str(self.invoice_id))
-
-        except Exception as e:
-
-            flash(f"Error: {str(e)}", "error")
-            return None
-        
-        return status
+        flash(f"Error: {str(e)}", "error")
+        return None
+    
+    return status

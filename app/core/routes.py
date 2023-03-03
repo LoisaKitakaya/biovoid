@@ -6,10 +6,10 @@ from app.models.art import Image
 from app.models.users import User
 from app.core.decorators import admin_required
 from app.models.subscription import Account, Payment
-from app.core.handle_payment import convert_currency, MakePayment
 from flask import render_template, redirect, url_for, flash, request
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
+from app.core.handle_payment import convert_currency, mpesa_payment, payment_status
 
 ACCOUNT_MANAGEMENT = {
     "free_account": {
@@ -46,6 +46,7 @@ def admin():
     users = User.query.all()
     images = Image.query.all()
     accounts = Account.query.all()
+    account_payments = Payment.query.all()
     user_account = Account.query.filter_by(user_id=current_user.id).first()
 
     return render_template(
@@ -54,6 +55,7 @@ def admin():
         this_account=user_account,
         all_users=users,
         all_accounts=accounts,
+        all_payments=account_payments,
         gallery=images,
     )
 
@@ -330,26 +332,41 @@ def payment(package):
             country_code = "254"
             full_number = country_code + mpesa_number
 
-            payment_obj = MakePayment(tel_number=full_number, amount=1)
+            transaction = mpesa_payment(
+                tel_number=full_number,
+                amount=1
+            )
 
-            init_payment = payment_obj.mpesa_payment()
-            check_payment = payment_obj.payment_status()
+            if transaction:
 
-            user_account.subscription = ACCOUNT_MANAGEMENT["basic_account"]['tier']
-            user_account.generation_count = 0
+                register_payment = Payment(
+                    public_id=str(uuid4().hex),
+                    account_id = user_account.id,
+                    transaction_id = transaction['invoice']['invoice_id'],
+                    provider = transaction['invoice']['provider'],
+                    state = transaction['invoice']['state'],
+                    amount = int(transaction['invoice']['net_amount']),
+                    payed_by = transaction['customer']['phone_number'],
+                )
 
-            try:
+                try:
 
-                db.session.commit()
+                    db.session.add(register_payment)
 
-            except Exception as e:
+                except Exception as e:
 
-                flash(f"Error: {str(e)}", "error")
-                return None
+                    flash(f"Error: {str(e)}", "error")
+                    return None
+                
+                else:
 
+                    db.session.commit()
+                    
+                return redirect(url_for('core.processing', package=package))
+            
             else:
 
-                flash("You are now subscribed to the Basic tier", "message")
+                flash("Could not process payment")
                 return redirect(url_for('core.payment', package=package))
 
         elif package == "standard":
@@ -358,26 +375,41 @@ def payment(package):
             country_code = "254"
             full_number = country_code + mpesa_number
 
-            payment_obj = MakePayment(tel_number=full_number, amount=1)
+            transaction = mpesa_payment(
+                tel_number=full_number,
+                amount=1
+            )
 
-            init_payment = payment_obj.mpesa_payment()
-            check_payment = payment_obj.payment_status()
+            if transaction:
 
-            user_account.subscription = ACCOUNT_MANAGEMENT["standard_account"]['tier']
-            user_account.generation_count = 0
+                register_payment = Payment(
+                    public_id=str(uuid4().hex),
+                    account_id = user_account.id,
+                    transaction_id = transaction['invoice']['invoice_id'],
+                    provider = transaction['invoice']['provider'],
+                    state = transaction['invoice']['state'],
+                    amount = int(transaction['invoice']['net_amount']),
+                    payed_by = transaction['customer']['phone_number'],
+                )
 
-            try:
+                try:
 
-                db.session.commit()
+                    db.session.add(register_payment)
 
-            except Exception as e:
+                except Exception as e:
 
-                flash(f"Error: {str(e)}", "error")
-                return None
+                    flash(f"Error: {str(e)}", "error")
+                    return None
+                
+                else:
 
+                    db.session.commit()
+                    
+                return redirect(url_for('core.processing', package=package))
+            
             else:
 
-                flash("You are now subscribed to the Standard tier", "message")
+                flash("Could not process payment")
                 return redirect(url_for('core.payment', package=package))
 
         elif package == "pro":
@@ -386,29 +418,42 @@ def payment(package):
             country_code = "254"
             full_number = country_code + mpesa_number
 
-            payment_obj = MakePayment(tel_number=full_number, amount=1)
+            transaction = mpesa_payment(
+                tel_number=full_number,
+                amount=1
+            )
 
-            init_payment = payment_obj.mpesa_payment()
-            check_payment = payment_obj.payment_status()
+            if transaction:
 
-            user_account.subscription = ACCOUNT_MANAGEMENT["pro_account"]['tier']
-            user_account.generation_count = 0
+                register_payment = Payment(
+                    public_id=str(uuid4().hex),
+                    account_id = user_account.id,
+                    transaction_id = transaction['invoice']['invoice_id'],
+                    provider = transaction['invoice']['provider'],
+                    state = transaction['invoice']['state'],
+                    amount = int(transaction['invoice']['net_amount']),
+                    payed_by = transaction['customer']['phone_number'],
+                )
 
-            try:
+                try:
 
-                db.session.commit()
+                    db.session.add(register_payment)
 
-            except Exception as e:
+                except Exception as e:
 
-                flash(f"Error: {str(e)}", "error")
-                return None
+                    flash(f"Error: {str(e)}", "error")
+                    return None
+                
+                else:
 
+                    db.session.commit()
+                    
+                return redirect(url_for('core.processing', package=package))
+            
             else:
 
-                flash("You are now subscribed to the Pro tier", "message")
+                flash("Could not process payment")
                 return redirect(url_for('core.payment', package=package))
-
-        return redirect(url_for('core.payment'))
 
     return render_template(
         'site/payment.html',
@@ -416,4 +461,93 @@ def payment(package):
         this_account=user_account,
         this_amount=amount,
         this_page=page,
+    )
+
+@bp.route('/processing/<package>/', methods=['GET'])
+@login_required
+def processing(package):
+
+    user_account = Account.query.filter_by(user_id=current_user.id).first()
+    user_payment = Payment.query.filter_by(account_id=user_account.id).\
+        order_by(Payment.id.desc()).first()
+
+    page = package
+    process_state = "processing"
+
+    if package == "free":
+
+        pass
+
+    elif package == "basic":
+
+        process_payment = payment_status(invoice_id=user_payment.transaction_id)
+
+        print(process_payment)
+
+        user_account.subscription = ACCOUNT_MANAGEMENT["basic_account"]['tier']
+        user_account.generation_count = 0
+
+        try:
+
+            db.session.commit()
+
+        except Exception as e:
+
+            flash(f"Error: {str(e)}", "error")
+            return None
+
+        else:
+
+            flash("You are now subscribed to the Basic tier", "message")
+
+    elif package == "standard":
+
+        process_payment = payment_status(invoice_id=user_payment.transaction_id)
+
+        print(process_payment)
+
+        user_account.subscription = ACCOUNT_MANAGEMENT["standard_account"]['tier']
+        user_account.generation_count = 0
+
+        try:
+
+            db.session.commit()
+
+        except Exception as e:
+
+            flash(f"Error: {str(e)}", "error")
+            return None
+
+        else:
+
+            flash("You are now subscribed to the Standard tier", "message")
+
+    elif package == "pro":
+
+        process_payment = payment_status(invoice_id=user_payment.transaction_id)
+
+        print(process_payment)
+
+        user_account.subscription = ACCOUNT_MANAGEMENT["pro_account"]['tier']
+        user_account.generation_count = 0
+
+        try:
+
+            db.session.commit()
+
+        except Exception as e:
+
+            flash(f"Error: {str(e)}", "error")
+            return None
+
+        else:
+
+            flash("You are now subscribed to the Pro tier", "message")
+
+    return render_template(
+        'site/processing.html',
+        this_user=current_user,
+        this_account=user_account,
+        this_page=page,
+        this_state=process_state,
     )

@@ -21,7 +21,9 @@ class Payment(db.Model):
     account_id = db.Column(db.Integer, db.ForeignKey("account.id"))
     transaction_id = db.Column(db.String(256), unique=True, nullable=False)
     provider = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(100), nullable=False)
     amount = db.Column(db.Integer, nullable=False, default=0)
+    payed_by = db.Column(db.String(100), nullable=False)
     created_on = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
 
     def __repr__(self) -> str:

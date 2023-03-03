@@ -155,7 +155,6 @@
               <th scope="col">Public id</th>
               <th scope="col">Subscription</th>
               <th scope="col">Gen count</th>
-              <th scope="col">No. of Images</th>
             </tr>
           </thead>
           {% if all_accounts %}
@@ -167,7 +166,6 @@
               <td>{{ account.public_id }}</td>
               <td>{{ account.subscription }}</td>
               <td>{{ account.generation_count }}</td>
-              <td>{{ account.number_of_images }}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -180,10 +178,49 @@
         role="tabpanel"
         aria-labelledby="payment-tab"
       >
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo
-        blanditiis mollitia molestias qui voluptas earum harum magnam molestiae,
-        rerum nemo. Ut cupiditate sequi obcaecati ea pariatur impedit officiis
-        sed vero.
+        <table
+          class="table table-striped table-hover table-borderless caption-top text-center"
+        >
+          <caption>
+            List of payments made
+          </caption>
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">account id</th>
+              <th scope="col">Transaction id</th>
+              <th scope="col">Provider</th>
+              <th scope="col">State</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Payed by</th>
+              <th scope="col">Date of payment</th>
+            </tr>
+          </thead>
+          {% if all_payments %}
+          <tbody>
+            {% for payment in all_payments %}
+            <tr>
+              <td>{{ payment.id }}</td>
+              <td>{{ payment.account_id }}</td>
+              <td>{{ payment.transaction_id }}</td>
+              <td>{{ payment.provider }}</td>
+              {% if payment.state == 'PENDING' %}
+              <td class="text-warning">{{ payment.state }}</td>
+              {% elif payment.state == 'PROCESSING' %}
+              <td class="text-primary">{{ payment.state }}</td>
+              {% elif payment.state == 'COMPLETE' %}
+              <td class="text-success">{{ payment.state }}</td>
+              {% elif payment.state == 'FAILED' %}
+              <td class="text-danger">{{ payment.state }}</td>
+              {% endif %}
+              <td>{{ payment.amount }}</td>
+              <td>{{ payment.payed_by }}</td>
+              <td>{{ payment.created_on }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          {% endif %}
+        </table>
       </div>
       <div
         class="tab-pane fade mt-3 px-3"
