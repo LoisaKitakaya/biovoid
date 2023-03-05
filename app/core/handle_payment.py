@@ -24,9 +24,9 @@ def convert_currency(quantity):
 token = os.environ.get('INTASEND_API_TOKEN')
 publishable_key = os.environ.get('INTASEND_PUBLISHABLE_KEY')
 
-def mpesa_payment(tel_number, amount):
+service = APIService(token=token, publishable_key=publishable_key, test=False)
 
-    service = APIService(token=token, publishable_key=publishable_key, live=True)
+def mpesa_payment(tel_number, amount):
 
     try:
 
@@ -43,7 +43,7 @@ def mpesa_payment(tel_number, amount):
 
 def payment_status(invoice_id):
 
-    service = APIService(token=token, publishable_key=publishable_key, live=True)
+    service = APIService(token=token, publishable_key=publishable_key, test=False)
 
     try:
 

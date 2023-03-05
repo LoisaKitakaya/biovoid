@@ -334,7 +334,7 @@ def payment(package):
 
             transaction = mpesa_payment(
                 tel_number=full_number,
-                amount=1
+                amount=amount
             )
 
             if transaction:
@@ -377,7 +377,7 @@ def payment(package):
 
             transaction = mpesa_payment(
                 tel_number=full_number,
-                amount=1
+                amount=amount
             )
 
             if transaction:
@@ -420,7 +420,7 @@ def payment(package):
 
             transaction = mpesa_payment(
                 tel_number=full_number,
-                amount=1
+                amount=amount
             )
 
             if transaction:
